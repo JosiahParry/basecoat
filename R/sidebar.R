@@ -16,7 +16,6 @@ bc_sidebar_id <- function(prefix) {
 #'
 #' A fixed navigation panel beside the page content.
 #'
-#' @inheritParams bc_sidebar_group id
 #' @param ... Tag attributes and navigation groups for the scrollable
 #'   `<section>`, between the optional `<header>` and `<footer>`.
 #' @param side String. One of `"left"` or `"right"`. Which viewport side the
@@ -32,7 +31,7 @@ bc_sidebar_id <- function(prefix) {
 #'   becomes the mobile overlay, such as `"48rem"`.
 #' @return An `<aside>` tag.
 #' @details
-#' Sidebar needs its script, so load it through [bc_cdn()] with `js = "sidebar"`.
+#' Sidebar needs its script, so load it through [bc_deps()] with `js = "sidebar"`.
 #'
 #' The desktop margin of the sibling `<main>` is Basecoat's own styling; the
 #' toggle button that opens and closes the sidebar is a page control.
@@ -170,8 +169,6 @@ bc_sidebar_item <- function(label,
 }
 
 #' @rdname bc_sidebar
-#' @inheritParams bc_sidebar_group id
-#' @inheritParams bc_sidebar_item label, icon, variant, size, active, keep_mobile_open
 #' @export
 #' @examples
 #'
@@ -215,7 +212,6 @@ bc_sidebar_submenu <- function(label,
 }
 
 #' @rdname bc_sidebar
-#' @inheritParams bc_sidebar_group id
 #' @export
 bc_sidebar_separator <- function() {
   tags$hr(role = "separator")

@@ -4,9 +4,9 @@
 \name{basecoat-package}
 \alias{basecoat}
 \alias{basecoat-package}
-\title{basecoat: Basecoat UI Components for htmltools}
+\title{basecoat: Basecoat UI Components}
 \description{
-Builds Basecoat UI markup with htmltools tags, and attaches the Basecoat stylesheet and scripts from a CDN as an HTML dependency.
+Builds Basecoat UI markup with htmltools tags, and attaches the bundled Basecoat stylesheet and scripts as an HTML dependency.
 }
 \seealso{
 Useful links:
@@ -21,6 +21,11 @@ Useful links:
 Authors:
 \itemize{
   \item Josiah Parry \email{josiah@ricochet.rs}
+}
+
+Other contributors:
+\itemize{
+  \item Ronan Berder (Author of the bundled basecoat-css library) [contributor, copyright holder]
 }
 
 }

@@ -1,0 +1,7 @@
+/* Built into inst/basecoat/basecoat-maia.min.css by `just vendor`. See vega.css
+   for what the sources do. */
+@import "tailwindcss";
+@import "basecoat-css/maia";
+
+@source "../R";
+@source "../dev/kitchen-sink.R";

@@ -1,8 +1,10 @@
-# Render every component through every style pack, one standalone page per
-# style, and open an index. Each page attaches its own `bc_cdn()` dependency, so
-# this also proves the style argument reaches the `<head>`.
+# Render every component through a style, one standalone page per style, and
+# open an index. Each page attaches its own `bc_deps()` dependency, so this also
+# proves the style argument reaches the `<head>`.
 #
-#   source("dev/kitchen-sink.R")          # all eight styles
+#   source("dev/kitchen-sink.R")          # all eight packs, one page each
+#   kitchen_sink("vega", theme = "~/theme.css")   # a pack under your own tokens
+#   kitchen_sink("base")                  # tokens and structure, no visual style
 #   kitchen_sink("rhea")                  # just one, opened directly
 
 devtools::load_all()
@@ -678,11 +680,11 @@ demo_sections <- function() {
   )
 }
 
-# `save_html()` builds the document and renders the attached `bc_cdn()`
+# `save_html()` builds the document and renders the attached `bc_deps()`
 # dependency into its `<head>`. It gives a bare `<body>` with only a background,
 # so the padding, font and text colour ride on an inner wrapper. The theme
 # switcher attaches its icon-swap utilities itself.
-demo_page <- function(style) {
+demo_page <- function(style, theme = NULL) {
   body <- tags$div(
     style = paste(
       "max-width:48rem;margin:0 auto;padding:2.5rem",
@@ -697,21 +699,25 @@ demo_page <- function(style) {
     demo_sections()
   )
 
-  attachDependencies(body, bc_cdn(style = style, js = TRUE))
+  attachDependencies(body, bc_deps(style = style, js = TRUE, theme = theme))
 }
 
 write_page <- function(page, file, background = "var(--background)") {
   htmltools::save_html(page, file, background = background)
 }
 
-kitchen_sink <- function(styles = bc_styles) {
-  styles <- rlang::arg_match(styles, bc_styles, multiple = TRUE)
+kitchen_sink <- function(styles = bc_styles, theme = NULL) {
+  styles <- rlang::arg_match(styles, bc_style_choices, multiple = TRUE)
 
   dir <- tempfile("basecoat-kitchen-")
   dir.create(dir)
 
   files <- file.path(dir, paste0(styles, ".html"))
-  Map(function(style, file) write_page(demo_page(style), file), styles, files)
+  Map(
+    function(style, file) write_page(demo_page(style, theme), file),
+    styles,
+    files
+  )
 
   target <- if (length(styles) == 1) {
     files[[1]]

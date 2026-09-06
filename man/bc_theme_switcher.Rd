@@ -18,7 +18,7 @@ A button that flips the \code{dark} class on \verb{<html>}, toggling the page th
 \details{
 Ships the Tailwind utilities the sun and moon swap on (\code{hidden}, \code{block},
 \code{dark:block}, \code{dark:hidden}, \code{size-8}) as a head dependency, so a page needs
-no Tailwind build. The Basecoat runtime behind \code{\link[=bc_cdn]{bc_cdn()}} drives the toggle,
+no Tailwind build. The Basecoat runtime behind \code{\link[=bc_deps]{bc_deps()}} drives the toggle,
 and a bundled script applies the stored mode on load.
 }
 \examples{

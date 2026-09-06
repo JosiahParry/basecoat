@@ -1,0 +1,241 @@
+# The asset binding. Basecoat ships one stylesheet per style pack and one
+# script per interactive component, so choosing a style and a set of components
+# is the whole of the configuration.
+
+# The version of basecoat-css these bindings are written against, and the
+# version vendored in inst/basecoat. The markup a component function emits is
+# only promised to match this release. Bumping it means bumping package.json
+# and running `just vendor`.
+bc_version <- "1.0.2"
+
+# The style packs, as named on the installation page. `vega` is the default.
+bc_styles <- c(
+  "vega",
+  "nova",
+  "maia",
+  "lyra",
+  "mira",
+  "luma",
+  "sera",
+  "rhea"
+)
+
+# What `style` accepts. `base` is the styleless layer: tokens and component
+# structure, with the visual decisions left to whoever brings a theme.
+bc_style_choices <- c("base", bc_styles)
+
+# The components that need JavaScript. Every other component is CSS only, so
+# asking for none of these is a page with no script at all.
+bc_scripts <- c(
+  "accordion",
+  "combobox",
+  "command",
+  "drawer",
+  "dropdown-menu",
+  "popover",
+  "range",
+  "select",
+  "sidebar",
+  "tabs",
+  "toast"
+)
+
+#' Basecoat assets
+#'
+#' The Basecoat stylesheet and scripts as an [htmltools::htmlDependency()],
+#' placed in the page `<head>`. Served from the files bundled with this package
+#' by default, or from jsDelivr.
+#'
+#' @section Why not the CDN:
+#' Basecoat is authored for Tailwind, and its published stylesheets carry only
+#' the utilities Basecoat's own source uses. Several components are documented in
+#' plain Tailwind, so from those files a pagination row does not lay out and a
+#' spinner does not turn. The bundled stylesheets are built here against the
+#' markup these functions write, which is why `source = "local"` is the default.
+#'
+#' @param style String or `NULL`. A style pack, one of `r toString(bc_styles)`,
+#'   or `"base"` for tokens and structure with no visual style at all.
+#' @param js `TRUE` for every component's script, `FALSE` for none, or a
+#'   character vector of component names to load beside the runtime.
+#' @param theme String or `NULL`. Path to a CSS file of your own, loaded after
+#'   the style pack so its tokens win. See [bc_theme()].
+#' @param source String. `"local"` to serve the bundled files, or `"cdn"` to
+#'   serve Basecoat's own from jsDelivr, which lays out several components wrong.
+#' @param version String. The `basecoat-css` release to serve. Only
+#'   `r bc_version` is bundled, so any other release needs `source = "cdn"`.
+#' @return An [htmltools::htmlDependency()], or a list of two when `theme` is
+#'   given.
+#' @details
+#' Attach it with [htmltools::attachDependencies()], or return it in a
+#' [htmltools::tagList()] beside your markup. Call it once per page: a second
+#' call with another style is de-duplicated by name and only one wins.
+#'
+#' `theme` is the whole of custom theming, and it is returned after the
+#' stylesheet rather than beside it so its token values win.
+#'
+#' A style pack settles a few visuals without reading your tokens. `--radius-lg`
+#' and its siblings follow `--radius`, but `--radius-2xl` and `--radius-4xl` are
+#' fixed, and `.badge` uses the latter. Restate those in your theme to reach them.
+#'
+#' `style = "base"` drops the visual style entirely, leaving tokens and component
+#' structure. That is a starting point for writing a style pack, not a way to
+#' theme one, since it carries no surfaces, padding or type scale.
+#'
+#' Basecoat is authored for Tailwind. Load any other Tailwind build before this
+#' dependency, never after, or that build resets borders and inputs to their
+#' own defaults.
+#' @export
+#' @examples
+#' bc_deps()
+#'
+#' bc_deps(style = "maia", js = c("select", "toast"))
+#'
+#' bc_deps(source = "cdn")
+#'
+#' css <- tempfile(fileext = ".css")
+#' writeLines(":root { --primary: oklch(0.54 0.16 320); }", css)
+#'
+#' htmltools::attachDependencies(bc_button("Save"), bc_deps(theme = css))
+bc_deps <- function(
+  style = NULL,
+  js = TRUE,
+  theme = NULL,
+  source = c("local", "cdn"),
+  version = bc_version
+) {
+  style <- style %||% "vega"
+  style <- arg_match(style, bc_style_choices)
+  source <- arg_match(source)
+  check_string(version, allow_empty = FALSE)
+
+  if (source == "local" && !identical(version, bc_version)) {
+    cli::cli_abort(c(
+      "Only {.val {bc_version}} of {.pkg basecoat-css} is bundled.",
+      i = "Use {.code source = \"cdn\"} to serve {.val {version}}."
+    ))
+  }
+
+  # The bundled stylesheets are this package's own Tailwind build, so they carry
+  # the utilities the component functions write and the CDN files do not.
+  src <- switch(
+    source,
+    local = c(file = "basecoat"),
+    cdn = c(
+      href = paste0("https://cdn.jsdelivr.net/npm/basecoat-css@", version, "/dist")
+    )
+  )
+
+  stylesheet <- switch(
+    source,
+    local = paste0("basecoat-", style, ".min.css"),
+    cdn = paste0("basecoat-", style, ".cdn.min.css")
+  )
+
+  scripts <- lapply(bc_script_files(js), function(file) {
+    list(src = paste0("js/", file), defer = NA)
+  })
+
+  dep <- htmltools::htmlDependency(
+    name = "basecoat",
+    version = version,
+    src = src,
+    package = if (source == "local") "basecoat",
+    stylesheet = stylesheet,
+    script = if (length(scripts)) scripts
+  )
+
+  if (is.null(theme)) {
+    return(dep)
+  }
+
+  # The theme comes second, which is what lets its tokens win.
+  list(dep, bc_theme(theme))
+}
+
+#' A custom theme stylesheet
+#'
+#' A CSS file of your own as an [htmltools::htmlDependency()]. Reach for
+#' `bc_deps(theme = )` instead, which orders it against the style pack for you.
+#'
+#' @param path String. Path to a `.css` file defining Basecoat's tokens.
+#' @return An [htmltools::htmlDependency()].
+#' @details
+#' This is the piece on its own, for a page whose [bc_deps()] call lives
+#' somewhere else. It has to render after that dependency for its tokens to win.
+#'
+#' The style pack still owns component visuals, so the file only restates the
+#' tokens it changes. Basecoat reads shadcn/ui token names, such as
+#' `--background`, `--foreground`, `--primary`, `--border` and `--ring`, from
+#' `:root` and from `.dark`. A Tailwind `@theme` block is ignored by the browser
+#' and is not needed, since the bundled stylesheet already maps those tokens.
+#'
+#' The dependency is named after the file, so two different files both load.
+#' @export
+#' @examples
+#' css <- tempfile(fileext = ".css")
+#' writeLines(":root { --primary: oklch(0.54 0.16 320); }", css)
+#'
+#' bc_theme(css)
+bc_theme <- function(path) {
+  check_string(path, allow_empty = FALSE)
+
+  if (!file.exists(path)) {
+    cli::cli_abort("No file at {.path {path}}.")
+  }
+
+  path <- normalizePath(path, "/", mustWork = TRUE)
+  file <- basename(path)
+
+  # Called outside the namespace, because htmlDependency() warns about absolute
+  # paths from one. The warning is aimed at paths baked in at build time, and
+  # this one is the caller's own, given at run time.
+  local(htmltools::htmlDependency(
+    name = paste0("basecoat-theme-", sub("\\.css$", "", file, ignore.case = TRUE)),
+    version = "1.0.0",
+    src = c(file = dirname(path)),
+    stylesheet = file,
+    # The file's own directory is the caller's, so copy nothing that sits beside
+    # it into the rendered page.
+    all_files = FALSE
+  ))
+}
+
+# Which script files answer a `js` argument. The runtime has to come first when
+# individual components are asked for, and is already inside the all-in-one.
+bc_script_files <- function(js, call = caller_env()) {
+  if (isTRUE(js)) {
+    return("all.min.js")
+  }
+
+  if (isFALSE(js)) {
+    return(character())
+  }
+
+  js <- arg_match(js, bc_scripts, multiple = TRUE, error_call = call)
+
+  c("basecoat.min.js", paste0(js, ".min.js"))
+}
+
+#' Re-initialise Basecoat after a swap
+#'
+#' Basecoat initialises its components on load and when new DOM is inserted, so
+#' this is only wanted where markup is restored from a cache rather than parsed.
+#'
+#' @param force Bool. Destroy and rebuild components that are already
+#'   initialised, which also clears open menus and focus.
+#' @return A `<script>` tag.
+#' @details
+#' An htmx history restore is the case this exists for: the browser puts back
+#' DOM that was already initialised, and only `force` rebuilds it.
+#' @export
+#' @examples
+#' bc_init(force = TRUE)
+bc_init <- function(force = FALSE) {
+  check_bool(force)
+
+  tags$script(HTML(paste0(
+    "window.basecoat.initAll(",
+    if (force) "{ force: true }",
+    ")"
+  )))
+}

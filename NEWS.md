@@ -47,9 +47,20 @@
   `bc_sidebar_submenu()` and `bc_sidebar_separator()`, writes a fixed
   navigation sidebar beside page content.
 * `bc_kbd()` writes a key label in a `kbd` element.
-* `bc_cdn()` now returns an `htmltools::htmlDependency()` rather than loose
-  tags, so the stylesheet and scripts land in the page `<head>` and de-duplicate
-  across a render.
+* Basecoat ships inside the package, under `inst/basecoat/`, so a page needs no
+  network access. All eight style packs are bundled, along with `base` and every
+  component script.
+* The bundled stylesheets are built here with Tailwind, against the markup the
+  component functions write. Basecoat's published CSS carries only the utilities
+  its own source uses, so from those files a pagination row does not lay out and
+  a spinner does not turn.
+* `bc_deps(theme = )` loads a CSS file of your own after the style pack, for
+  overriding Basecoat's tokens with a shadcn/ui theme. `bc_theme()` builds that
+  dependency on its own.
+* `bc_deps()` returns the stylesheet and scripts as an
+  `htmltools::htmlDependency()`, so they land in the page `<head>` and
+  de-duplicate across a render. They are served from the copy of `basecoat-css`
+  bundled with this package, or from jsDelivr with `source = "cdn"`.
 * `bc_init()` re-initialises Basecoat over DOM that was restored rather than
   parsed, which is what an htmx history restore leaves behind.
 * `bc_button()`, `bc_badge()` and `bc_alert()` write Basecoat 1.0 markup: a

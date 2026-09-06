@@ -23,7 +23,7 @@ function() {
     hx_head(
       title = "Basecoat toasts with htmxr",
       htmltools::renderDependencies(
-        list(bc_cdn(style = "lyra", js = TRUE)),
+        list(bc_deps(style = "lyra", js = TRUE, source = "cdn")),
         srcType = "href"
       )
     ),

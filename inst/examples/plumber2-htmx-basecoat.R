@@ -21,7 +21,7 @@ function() {
     hx_head(
       title = "Basecoat with HTMXR",
       htmltools::renderDependencies(
-        list(bc_cdn(style = "lyra", js = TRUE)),
+        list(bc_deps(style = "lyra", js = TRUE, source = "cdn")),
         srcType = "href"
       )
     ),

@@ -107,7 +107,7 @@ An \verb{<aside>} tag.
 A fixed navigation panel beside the page content.
 }
 \details{
-Sidebar needs its script, so load it through \code{\link[=bc_cdn]{bc_cdn()}} with \code{js = "sidebar"}.
+Sidebar needs its script, so load it through \code{\link[=bc_deps]{bc_deps()}} with \code{js = "sidebar"}.
 
 The desktop margin of the sibling \verb{<main>} is Basecoat's own styling; the
 toggle button that opens and closes the sidebar is a page control.

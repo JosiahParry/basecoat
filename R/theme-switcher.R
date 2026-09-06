@@ -35,7 +35,7 @@ bc_theme_switcher_icons <- list(
 #' @details
 #' Ships the Tailwind utilities the sun and moon swap on (`hidden`, `block`,
 #' `dark:block`, `dark:hidden`, `size-8`) as a head dependency, so a page needs
-#' no Tailwind build. The Basecoat runtime behind [bc_cdn()] drives the toggle,
+#' no Tailwind build. The Basecoat runtime behind [bc_deps()] drives the toggle,
 #' and a bundled script applies the stored mode on load.
 #' @export
 #' @examples

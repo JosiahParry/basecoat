@@ -6,3 +6,8 @@
 ^rproject\.toml$
 ^rv$
 ^rv\.lock$
+^node_modules$
+^package\.json$
+^bun\.lock$
+^justfile$
+^srcss$

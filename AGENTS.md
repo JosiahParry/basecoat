@@ -8,6 +8,22 @@ user's time. The docs are mirrored as markdown in `dev/basecoat-docs/` (one
 file per component, plus `installation.md` and `customization.md`); read those.
 Refresh a page with `curl -sL https://basecoatui.com/components/<name>.md`.
 
+## Bundled assets
+
+`inst/basecoat/` holds what `bc_deps()` serves. It is built, committed, and never
+edited by hand. `just vendor` rebuilds it with `bun`.
+
+The stylesheets are this package's own Tailwind build, one per style, from the
+inputs in `srcss/`. Basecoat's published CSS carries only the utilities its own
+source uses, so components it documents in plain Tailwind, such as pagination and
+the spinner animation, do not render from it. Tailwind scans `R/` and
+`dev/kitchen-sink.R`, so **a utility class only works once it appears in a file
+listed by `@source` in `srcss/*.css`**. Add a class to a component, then run
+`just vendor`. The scripts are copied from `basecoat-css` unchanged.
+
+To move to a new `basecoat-css` release: bump the version in `package.json`, bump
+`bc_version` in `R/deps.R`, run `just vendor`, then re-document.
+
 ## Coding Standards
 
 - Never use `do.call()`
