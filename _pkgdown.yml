@@ -1,0 +1,27 @@
+url: https://basecoatui.com
+
+template:
+  bootstrap: 5
+
+reference:
+  - title: Serving Basecoat
+    contents:
+      - bc_cdn
+      - bc_init
+  - title: Layout
+    contents:
+      - bc_card
+  - title: Actions
+    contents:
+      - bc_button
+  - title: Inputs
+    contents:
+      - bc_checkbox
+      - bc_combobox
+  - title: Display
+    contents:
+      - bc_alert
+      - bc_avatar
+      - bc_badge
+      - bc_progress
+      - bc_skeleton

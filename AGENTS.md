@@ -1,0 +1,60 @@
+# AGENTS.md
+
+`basecoat` is a shadcn ui system implemented only in tailwind.
+
+**Do not read the source of `basecoat-css` (the CDN files, the npm package, the
+dist CSS or JS).** It is not needed to work on this package and wastes the
+user's time. The docs are mirrored as markdown in `dev/basecoat-docs/` (one
+file per component, plus `installation.md` and `customization.md`); read those.
+Refresh a page with `curl -sL https://basecoatui.com/components/<name>.md`.
+
+## Coding Standards
+
+- Never use `do.call()`
+- Never use nested for loops
+
+### The em dash rule
+
+**`–` (space–en/em dash–space) is banned in all code, strings, and documentation.**
+
+### Parameter documentation
+
+**Never duplicate parameter docs.** Always use `@inheritParams` pointing to a function that already documents those parameters:
+
+### Documentation style
+
+**Be ruthlessly concise.** Max two sentences per block (title/description, `@param`, `@return`). No `;`. No em dash (see above). State what a thing does, not what it doesn't do or every edge case — put that in `@details` instead.
+
+`@param` lines follow this structure, where `{...}` is a placeholder for the actual type/value (not literal braces):
+
+```
+@param name Value type. Concise definition.
+```
+
+Example: `@param name String. Name of the new class.`
+
+### Parameter validation
+
+**Always use rlang standalone checks** for every parameter in a function. These are imported via `R/import-standalone-types-check.R`:
+
+```r
+check_string(x, allow_empty = FALSE)
+check_bool(x)
+check_number_whole(x, min = 1, max = 100)
+check_number_decimal(x)
+check_character(x, allow_null = TRUE)
+check_data_frame(x)
+check_function(x)
+```
+
+### Error messages
+
+Use `cli::cli_abort()` with `call = error_call` (or `call = rlang::caller_env()`). Use cli inline markup: `{.arg x}`, `{.cls ClassName}`, `{.fn function_name}`, `{.val value}`, `{.code expr}`.
+
+### Base R vs rlang
+
+Prefer the rlang equivalent of a base R function when one exists. In particular, use `rlang::expr()` instead of `quote()`.
+
+## Adding Examples to Kitchen Sink
+
+When adding new components or functions, always add examples to `dev/kitchen-sink.R` to demonstrate usage patterns. Place examples within the appropriate demo_group section following the existing patterns.
