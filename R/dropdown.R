@@ -7,7 +7,9 @@
 #'   `bc_dropdown_group()`, `bc_dropdown_separator()`,
 #'   `bc_dropdown_checkbox()` and `bc_dropdown_radio()`.
 #' @param id String. The ID for the dropdown wrapper.
-#' @param trigger_label String. The trigger button's label.
+#' @param trigger_label String or tag. The trigger button's label.
+#' @param trigger A tag. A whole trigger, an avatar or anything else, in place
+#'   of the default button. The wiring attributes are added to it.
 #' @param variant String. The trigger's button variant.
 #' @param side String. Placement of the menu beside the trigger. One of `top`,
 #'   `right`, `bottom`, `left`, `inline-start` or `inline-end`.
@@ -48,11 +50,12 @@
 bc_dropdown_menu <- function(...,
                              id = NULL,
                              trigger_label = "Menu",
+                             trigger = NULL,
                              variant = "outline",
                              side = NULL,
                              align = NULL,
                              class = NULL) {
-  check_string(trigger_label, allow_empty = FALSE)
+  if (is.null(trigger)) check_string(trigger_label, allow_empty = FALSE)
   variant <- arg_match(variant, bc_button_variants)
   if (!is.null(side)) {
     side <- arg_match(side, c("top", "right", "bottom", "left", "inline-start", "inline-end"))
@@ -81,15 +84,18 @@ bc_dropdown_menu <- function(...,
     )
   )
 
-  trigger <- tags$button(
-    type = "button",
+  trigger <- htmltools::tagAppendAttributes(
+    trigger %||%
+      tags$button(
+        type = "button",
+        class = "btn",
+        `data-variant` = if (variant != "default") variant,
+        trigger_label
+      ),
     id = paste0(id, "-trigger"),
     `aria-haspopup` = "menu",
     `aria-controls` = paste0(id, "-menu"),
-    `aria-expanded` = "false",
-    class = "btn",
-    `data-variant` = if (variant != "default") variant,
-    trigger_label
+    `aria-expanded` = "false"
   )
 
   bc_tag(div(class = "dropdown-menu", id = id, trigger, popover))

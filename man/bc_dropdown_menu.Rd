@@ -13,6 +13,7 @@ bc_dropdown_menu(
   ...,
   id = NULL,
   trigger_label = "Menu",
+  trigger = NULL,
   variant = "outline",
   side = NULL,
   align = NULL,
@@ -50,7 +51,10 @@ lists are passed to \code{\link[=bc_dropdown_item]{bc_dropdown_item()}}. Build t
 
 \item{id}{String. The ID for the dropdown wrapper.}
 
-\item{trigger_label}{String. The trigger button's label.}
+\item{trigger_label}{String or tag. The trigger button's label.}
+
+\item{trigger}{A tag. A whole trigger, an avatar or anything else, in place
+of the default button. The wiring attributes are added to it.}
 
 \item{variant}{String. The trigger's button variant.}
 

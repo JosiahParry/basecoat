@@ -1,5 +1,8 @@
 # basecoat 0.0.0.9000
 
+* `bc_dropdown_menu(trigger =)` takes a whole trigger tag, an avatar or
+  anything else, in place of the default button.
+
 * A popover holding another popover no longer clips it. `[data-popover]` caps
   at 18rem and scrolls, which is right for a menu and wrong for a filter panel
   whose selects open inside it.
