@@ -33,7 +33,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9000" id="basecoat-0009000">basecoat 0.0.0.9000<a class="anchor" aria-label="anchor" href="#basecoat-0009000"></a></h2>
-<ul><li><p>A popover holding another popover no longer clips it. <code>[data-popover]</code> caps at 18rem and scrolls, which is right for a menu and wrong for a filter panel whose selects open inside it.</p></li>
+<ul><li><p><code>bc_dropdown_menu(trigger =)</code> takes a whole trigger tag, an avatar or anything else, in place of the default button.</p></li>
+<li><p>A popover holding another popover no longer clips it. <code>[data-popover]</code> caps at 18rem and scrolls, which is right for a menu and wrong for a filter panel whose selects open inside it.</p></li>
 <li><p><code>bc_popover(class =)</code> replaces the default <code>w-72</code> rather than being appended after it, since two width utilities on one element are resolved by stylesheet order and not by the order they are written.</p></li>
 <li><p>A popover-based control inside a popover no longer closes it. Opening any popover broadcasts <code>basecoat:popover</code> and every other one closes on it, so a select or combobox shut its own parent. <code>srcjs/nested-popover.js</code> re-opens an ancestor, registering on <code>basecoat:initialized</code> so it runs after the closing listener. It is the first of this package’s own scripts: <code>just vendor</code> copies <code>srcjs/</code> in beside the vendored ones and <code><a href="../reference/bc_deps.html">bc_deps()</a></code> loads them last.</p></li>
 <li><p><code>bc_select(multiple = TRUE)</code> works. It wrote <code>data-multiple</code> on the root and the script reads <code>aria-multiselectable</code> on the listbox, so a multiple select behaved as a single one.</p></li>

@@ -42,6 +42,7 @@
 <span>  <span class="va">...</span>,</span>
 <span>  id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  trigger_label <span class="op">=</span> <span class="st">"Menu"</span>,</span>
+<span>  trigger <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  variant <span class="op">=</span> <span class="st">"outline"</span>,</span>
 <span>  side <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  align <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -88,7 +89,12 @@ lists are passed to <code>bc_dropdown_item()</code>. Build the rest with
 
 
 <dt id="arg-trigger-label">trigger_label<a class="anchor" aria-label="anchor" href="#arg-trigger-label"></a></dt>
-<dd><p>String. The trigger button's label.</p></dd>
+<dd><p>String or tag. The trigger button's label.</p></dd>
+
+
+<dt id="arg-trigger">trigger<a class="anchor" aria-label="anchor" href="#arg-trigger"></a></dt>
+<dd><p>A tag. A whole trigger, an avatar or anything else, in place
+of the default button. The wiring attributes are added to it.</p></dd>
 
 
 <dt id="arg-variant">variant<a class="anchor" aria-label="anchor" href="#arg-variant"></a></dt>
@@ -160,7 +166,7 @@ popover.</p>
 <span class="r-in"><span>  <span class="fu">bc_dropdown_item</span><span class="op">(</span><span class="st">"Log out"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="dropdown-menu" id="dropdown-menu-11769267"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;button type="button" id="dropdown-menu-11769267-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11769267-menu" aria-expanded="false" class="btn" data-variant="outline"&gt;Menu&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;button type="button" class="btn" data-variant="outline" id="dropdown-menu-11769267-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11769267-menu" aria-expanded="false"&gt;Menu&lt;/button&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div id="dropdown-menu-11769267-popover" data-popover aria-hidden="true" class="min-w-32"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div role="menu" id="dropdown-menu-11769267-menu" aria-labelledby="dropdown-menu-11769267-trigger"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div role="group" aria-labelledby="dropdown-label-65731516"&gt;</span>
@@ -196,7 +202,7 @@ popover.</p>
 <span class="r-in"><span>  trigger_label <span class="op">=</span> <span class="st">"View"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;div class="dropdown-menu" id="dropdown-menu-11257147"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;button type="button" id="dropdown-menu-11257147-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11257147-menu" aria-expanded="false" class="btn" data-variant="outline"&gt;View&lt;/button&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;button type="button" class="btn" data-variant="outline" id="dropdown-menu-11257147-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11257147-menu" aria-expanded="false"&gt;View&lt;/button&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;div id="dropdown-menu-11257147-popover" data-popover aria-hidden="true" class="min-w-32"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;div role="menu" id="dropdown-menu-11257147-menu" aria-labelledby="dropdown-menu-11257147-trigger"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;div role="group" aria-labelledby="dropdown-label-78289396"&gt;</span>

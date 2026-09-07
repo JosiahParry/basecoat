@@ -68,13 +68,13 @@ writeLines(":root { --primary: oklch(0.54 0.16 320); }", css)
 
 bc_theme(css)
 #> List of 10
-#>  $ name      : chr "basecoat-theme-file19bc53ca0308"
+#>  $ name      : chr "basecoat-theme-file196759b12e66"
 #>  $ version   : chr "1.0.0"
 #>  $ src       :List of 1
-#>   ..$ file: chr "/tmp/RtmpbPXzYT"
+#>   ..$ file: chr "/tmp/Rtmpa1uITi"
 #>  $ meta      : NULL
 #>  $ script    : NULL
-#>  $ stylesheet: chr "file19bc53ca0308.css"
+#>  $ stylesheet: chr "file196759b12e66.css"
 #>  $ head      : NULL
 #>  $ attachment: NULL
 #>  $ package   : NULL

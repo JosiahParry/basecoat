@@ -9,6 +9,7 @@ bc_dropdown_menu(
   ...,
   id = NULL,
   trigger_label = "Menu",
+  trigger = NULL,
   variant = "outline",
   side = NULL,
   align = NULL,
@@ -54,7 +55,12 @@ bc_dropdown_radio(label, ..., checked = FALSE, disabled = FALSE, icon = NULL)
 
 - trigger_label:
 
-  String. The trigger button's label.
+  String or tag. The trigger button's label.
+
+- trigger:
+
+  A tag. A whole trigger, an avatar or anything else, in place of the
+  default button. The wiring attributes are added to it.
 
 - variant:
 
@@ -125,7 +131,7 @@ bc_dropdown_menu(
   bc_dropdown_item("Log out")
 )
 #> <div class="dropdown-menu" id="dropdown-menu-11769267">
-#>   <button type="button" id="dropdown-menu-11769267-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11769267-menu" aria-expanded="false" class="btn" data-variant="outline">Menu</button>
+#>   <button type="button" class="btn" data-variant="outline" id="dropdown-menu-11769267-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11769267-menu" aria-expanded="false">Menu</button>
 #>   <div id="dropdown-menu-11769267-popover" data-popover aria-hidden="true" class="min-w-32">
 #>     <div role="menu" id="dropdown-menu-11769267-menu" aria-labelledby="dropdown-menu-11769267-trigger">
 #>       <div role="group" aria-labelledby="dropdown-label-65731516">
@@ -161,7 +167,7 @@ bc_dropdown_menu(
   trigger_label = "View"
 )
 #> <div class="dropdown-menu" id="dropdown-menu-11257147">
-#>   <button type="button" id="dropdown-menu-11257147-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11257147-menu" aria-expanded="false" class="btn" data-variant="outline">View</button>
+#>   <button type="button" class="btn" data-variant="outline" id="dropdown-menu-11257147-trigger" aria-haspopup="menu" aria-controls="dropdown-menu-11257147-menu" aria-expanded="false">View</button>
 #>   <div id="dropdown-menu-11257147-popover" data-popover aria-hidden="true" class="min-w-32">
 #>     <div role="menu" id="dropdown-menu-11257147-menu" aria-labelledby="dropdown-menu-11257147-trigger">
 #>       <div role="group" aria-labelledby="dropdown-label-78289396">
