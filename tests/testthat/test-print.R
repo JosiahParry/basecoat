@@ -4,7 +4,7 @@ test_that("components carry the class that makes printing render them", {
     bc_alert("Heads up"),
     bc_alert_dialog(title = "Sure?"),
     bc_avatar(fallback = "JP"),
-    bc_badge("skill"),
+    bc_badge("new"),
     bc_breadcrumb(bc_breadcrumb_item("Home", href = "#")),
     bc_button("Save"),
     bc_button_group(bc_button("Copy")),
@@ -49,8 +49,8 @@ test_that("components carry the class that makes printing render them", {
 })
 
 test_that("a component still renders as the tag it was", {
-  expect_true(grepl('class="badge"', format(bc_badge("kill")), fixed = TRUE))
-  expect_s3_class(bc_badge("kill"), "shiny.tag")
+  expect_true(grepl('class="badge"', format(bc_badge("stable")), fixed = TRUE))
+  expect_s3_class(bc_badge("stable"), "shiny.tag")
   expect_s3_class(
     bc_alert_dialog(title = "Sure?", trigger = "Open"),
     "shiny.tag.list"
@@ -58,16 +58,16 @@ test_that("a component still renders as the tag it was", {
 })
 
 test_that("the class survives composition without duplicating", {
-  nested <- bc_card(bc_card_body(bc_badge("kill")))
+  nested <- bc_card(bc_card_body(bc_badge("stable")))
 
   expect_identical(sum(class(nested) == "bc_tag"), 1L)
-  expect_identical(class(bc_tag(bc_badge("kill"))), class(bc_badge("kill")))
+  expect_identical(class(bc_tag(bc_badge("stable"))), class(bc_badge("stable")))
 })
 
 test_that("printing without a viewer writes the HTML", {
-  expect_output(print(bc_badge("kill"), browse = FALSE), "badge")
+  expect_output(print(bc_badge("stable"), browse = FALSE), "badge")
 })
 
 test_that("the dependency is not baked into the component", {
-  expect_null(htmltools::htmlDependencies(bc_badge("kill")))
+  expect_null(htmltools::htmlDependencies(bc_badge("stable")))
 })

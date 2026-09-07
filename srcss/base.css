@@ -3,5 +3,7 @@
 @import "tailwindcss";
 @import "basecoat-css/base";
 
+@import "./_shared.css";
+
 @source "../R";
-@source "../dev/kitchen-sink.R";
+@source "../inst/examples/*.R";

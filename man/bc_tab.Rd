@@ -21,3 +21,12 @@ A list containing tab properties.
 \description{
 A helper function to create individual tab content panels.
 }
+\examples{
+bc_tab("Account details", label = "Account")
+
+bc_tab(
+  htmltools::p("Nothing to bill yet."),
+  label = "Billing",
+  disabled = TRUE
+)
+}

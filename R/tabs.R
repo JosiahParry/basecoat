@@ -11,8 +11,16 @@
 #' @export
 #' @examples
 #' bc_tabs(
-#'   list(label = "Account", content = "Account details"),
-#'   list(label = "Password", content = "Password settings")
+#'   bc_tab("Account details", label = "Account"),
+#'   bc_tab("Password settings", label = "Password"),
+#'   bc_tab("Not yet", label = "Billing", disabled = TRUE)
+#' )
+#'
+#' bc_tabs(
+#'   bc_tab(bc_card(bc_card_body("Usage this month")), label = "Usage"),
+#'   bc_tab(bc_card(bc_card_body("Seats and roles")), label = "Team"),
+#'   variant = "line",
+#'   id = "workspace"
 #' )
 bc_tabs <- function(..., variant = "default", orientation = "horizontal", id = NULL) {
   check_string(variant, allow_empty = FALSE)
@@ -103,6 +111,14 @@ bc_tabs <- function(..., variant = "default", orientation = "horizontal", id = N
 #' @param disabled Bool. Whether the tab is disabled.
 #' @return A list containing tab properties.
 #' @export
+#' @examples
+#' bc_tab("Account details", label = "Account")
+#'
+#' bc_tab(
+#'   htmltools::p("Nothing to bill yet."),
+#'   label = "Billing",
+#'   disabled = TRUE
+#' )
 bc_tab <- function(..., id = NULL, label, disabled = FALSE) {
   check_string(label, allow_empty = FALSE)
   check_bool(disabled)

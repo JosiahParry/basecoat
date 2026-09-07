@@ -48,6 +48,11 @@ bc_sidebar_id <- function(prefix) {
 #'       bc_sidebar_item("General", href = "#"),
 #'       bc_sidebar_item("Limits", href = "#")
 #'     )
+#'   ),
+#'   bc_sidebar_separator(),
+#'   bc_sidebar_group(
+#'     "Account",
+#'     bc_sidebar_item("Billing", href = "#")
 #'   )
 #' )
 bc_sidebar <- function(id = NULL,

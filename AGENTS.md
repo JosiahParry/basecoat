@@ -17,9 +17,9 @@ The stylesheets are this package's own Tailwind build, one per style, from the
 inputs in `srcss/`. Basecoat's published CSS carries only the utilities its own
 source uses, so components it documents in plain Tailwind, such as pagination and
 the spinner animation, do not render from it. Tailwind scans `R/` and
-`dev/kitchen-sink.R`, so **a utility class only works once it appears in a file
-listed by `@source` in `srcss/*.css`**. Add a class to a component, then run
-`just vendor`. The scripts are copied from `basecoat-css` unchanged.
+`inst/examples/*.R`, so **a utility class only works once it appears in a file
+listed by `@source` in `srcss/*.css`**. Add a class to a component or an example,
+then run `just vendor`. The scripts are copied from `basecoat-css` unchanged.
 
 To move to a new `basecoat-css` release: bump the version in `package.json`, bump
 `bc_version` in `R/deps.R`, run `just vendor`, then re-document.
@@ -82,6 +82,18 @@ Use `cli::cli_abort()` with `call = error_call` (or `call = rlang::caller_env()`
 
 Prefer the rlang equivalent of a base R function when one exists. In particular, use `rlang::expr()` instead of `quote()`.
 
-## Adding Examples to Kitchen Sink
+## Examples
 
-When adding new components or functions, always add examples to `dev/kitchen-sink.R` to demonstrate usage patterns. Place examples within the appropriate demo_group section following the existing patterns.
+Runnable examples live in `inst/examples/`, so they ship with the package and
+are sourced from it:
+
+```r
+source(system.file("examples", "kitchen-sink.R", package = "basecoat"))
+```
+
+Each one is standalone: it calls `library(basecoat)`, builds its own page, and
+runs itself on the last line. Never `devtools::load_all()` in one.
+
+When adding a new component or function, add it to the appropriate `demo_group`
+in `inst/examples/kitchen-sink.R`. A pattern that takes a whole page, such as an
+app shell, gets its own file beside it.

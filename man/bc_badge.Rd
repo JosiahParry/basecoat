@@ -20,7 +20,7 @@ A \verb{<span>} tag.
 A small inline status label.
 }
 \examples{
-bc_badge("kill")
+bc_badge("stable")
 
 bc_badge("wipe", variant = "destructive")
 }

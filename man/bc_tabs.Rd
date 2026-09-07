@@ -24,7 +24,15 @@ A tab component with navigation and content panels.
 }
 \examples{
 bc_tabs(
-  list(label = "Account", content = "Account details"),
-  list(label = "Password", content = "Password settings")
+  bc_tab("Account details", label = "Account"),
+  bc_tab("Password settings", label = "Password"),
+  bc_tab("Not yet", label = "Billing", disabled = TRUE)
+)
+
+bc_tabs(
+  bc_tab(bc_card(bc_card_body("Usage this month")), label = "Usage"),
+  bc_tab(bc_card(bc_card_body("Seats and roles")), label = "Team"),
+  variant = "line",
+  id = "workspace"
 )
 }

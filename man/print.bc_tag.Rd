@@ -25,5 +25,5 @@ The dependency is \code{\link[=bc_deps]{bc_deps()}} with its defaults, so a prev
 Vega pack. Wrap the component yourself to see another one.
 }
 \examples{
-print(bc_badge("kill"), browse = FALSE)
+print(bc_badge("stable"), browse = FALSE)
 }

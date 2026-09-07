@@ -14,3 +14,6 @@
 ^\.github$
 ^docs$
 ^pkgdown$
+^README\.qmd$
+^README_files$
+^README\.knit\.md$

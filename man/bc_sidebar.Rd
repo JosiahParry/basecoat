@@ -124,6 +124,11 @@ bc_sidebar(
       bc_sidebar_item("General", href = "#"),
       bc_sidebar_item("Limits", href = "#")
     )
+  ),
+  bc_sidebar_separator(),
+  bc_sidebar_group(
+    "Account",
+    bc_sidebar_item("Billing", href = "#")
   )
 )
 

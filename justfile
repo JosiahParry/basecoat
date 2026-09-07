@@ -16,7 +16,7 @@ test:
 readme:
   quarto render README.qmd --to gfm
 
-# Rebuild inst/basecoat from srcss/ and the basecoat-css scripts.
+# Rebuild inst/basecoat from srcss/, srcjs/ and the basecoat-css scripts.
 vendor:
   bun install
   rm -rf inst/basecoat
@@ -29,5 +29,8 @@ vendor:
   cp node_modules/basecoat-css/dist/js/*.min.js inst/basecoat/js/
   # Chart has no component function, so nothing can ask for its script.
   rm inst/basecoat/js/chart.min.js
+  # This package's own scripts, loaded after the vendored ones so they can
+  # correct behaviour rather than fork it.
+  cp srcjs/*.js inst/basecoat/js/
   cp node_modules/basecoat-css/LICENSE.md inst/basecoat/LICENSE.md
   du -sh inst/basecoat

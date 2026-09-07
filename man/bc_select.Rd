@@ -9,31 +9,49 @@ bc_select(
   placeholder = NULL,
   name = NULL,
   id = NULL,
+  selected = NULL,
   disabled = FALSE,
   invalid = FALSE,
-  multiple = FALSE
+  multiple = FALSE,
+  close_on_select = !multiple,
+  class = NULL
 )
 }
 \arguments{
-\item{...}{List of options. Each item can be a string or a list with 'value' and 'label'.}
+\item{...}{Options. A \code{\link[=bc_select_option]{bc_select_option()}}, a plain string, or a tag with
+\code{role = "option"} for one that carries its own markup.}
 
-\item{placeholder}{String. Placeholder text when no value is selected.}
+\item{placeholder}{String. Text shown while nothing is chosen.}
 
-\item{name}{String. The name attribute for the hidden input.}
+\item{name}{String. The \code{name} of the hidden input, defaulting to \code{id}.}
 
-\item{id}{String. The ID for the select container.}
+\item{id}{String. The ID for the select root. Trigger, popover and listbox
+IDs derive from it.}
+
+\item{selected}{String or character vector. Initial value, or values in
+multiple mode.}
 
 \item{disabled}{Bool. Whether the select is disabled.}
 
-\item{invalid}{Bool. Whether the select is in an invalid state.}
+\item{invalid}{Bool. Whether to show the invalid state.}
 
-\item{multiple}{Bool. Whether multiple selections are allowed.}
+\item{multiple}{Bool. Whether the listbox accepts several selections.}
+
+\item{close_on_select}{Bool. Whether choosing closes the popover. Defaults
+to \code{TRUE} for a single select and \code{FALSE} for a multiple one.}
+
+\item{class}{Vector of class names merged onto the trigger button, which is
+where the control's width is set.}
 }
 \value{
-A tag with proper select structure.
+A \verb{<div>} tag of class \code{select}.
 }
 \description{
-A selection component with dropdown options.
+A dropdown of options, with a hidden input carrying what was chosen.
+}
+\details{
+The hidden input holds the chosen value as a string in single mode and as a
+JSON array in multiple mode.
 }
 \examples{
 bc_select(
@@ -44,9 +62,24 @@ bc_select(
 )
 
 bc_select(
-  list(value = "light", label = "Light"),
-  list(value = "dark", label = "Dark"),
-  list(value = "system", label = "System"),
-  placeholder = "Theme"
+  bc_select_option("light", "Light"),
+  bc_select_option("dark", "Dark"),
+  bc_select_option("system", "System"),
+  placeholder = "Theme",
+  name = "appearance",
+  selected = "dark"
 )
+
+bc_select(
+  "tank",
+  "healer",
+  "dps",
+  placeholder = "Any role",
+  multiple = TRUE,
+  selected = c("tank", "healer"),
+  class = "w-full"
+)
+}
+\seealso{
+\code{\link[=bc_select_option]{bc_select_option()}}
 }

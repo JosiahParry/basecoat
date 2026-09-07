@@ -64,7 +64,7 @@ bc_combobox <- function(id,
   check_character(class, allow_null = TRUE, allow_empty = TRUE)
 
   listbox_id <- paste0(id, "-listbox")
-  options <- combobox_items(list(...))
+  options <- combobox_items(list2(...))
 
   hidden_value <- if (multiple) {
     if (length(selected) && any(nzchar(selected))) {
@@ -79,6 +79,7 @@ bc_combobox <- function(id,
   bc_tag(div(
     class = c("combobox", class),
     id = id,
+    `data-auto-highlight` = if (auto_highlight) "true",
     tags$input(
       type = "text",
       role = "combobox",
@@ -146,10 +147,12 @@ bc_combobox_option <- function(value, ..., label = NULL, filter = NULL) {
     check_string(filter, allow_empty = TRUE)
   }
 
-  content <- if (is.null(label)) {
-    if (length(list(...))) list(...) else value
+  # `label` is what the input displays, so it only stands in as the content
+  # when there is none: an option may be an icon beside its name.
+  content <- if (length(list(...))) {
+    list(...)
   } else {
-    label
+    label %||% value
   }
   bc_tag(div(
     role = "option",

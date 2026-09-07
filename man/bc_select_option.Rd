@@ -17,3 +17,12 @@ A list containing option properties.
 \description{
 A helper function to create individual select options.
 }
+\examples{
+bc_select_option("dark", "Dark")
+
+bc_select(
+  bc_select_option("us-east-1", "US East"),
+  bc_select_option("eu-west-1", "EU West"),
+  placeholder = "Region"
+)
+}

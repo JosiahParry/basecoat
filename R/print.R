@@ -26,7 +26,7 @@ bc_tag <- function(x) {
 #' Vega pack. Wrap the component yourself to see another one.
 #' @export
 #' @examples
-#' print(bc_badge("kill"), browse = FALSE)
+#' print(bc_badge("stable"), browse = FALSE)
 print.bc_tag <- function(x, browse = interactive(), ...) {
   if (!browse) {
     cat(format(x), "\n", sep = "")

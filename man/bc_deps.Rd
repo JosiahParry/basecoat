@@ -45,9 +45,9 @@ call with another style is de-duplicated by name and only one wins.
 \code{theme} is the whole of custom theming, and it is returned after the
 stylesheet rather than beside it so its token values win.
 
-A style pack settles a few visuals without reading your tokens. \code{--radius-lg}
-and its siblings follow \code{--radius}, but \verb{--radius-2xl} and \verb{--radius-4xl} are
-fixed, and \code{.badge} uses the latter. Restate those in your theme to reach them.
+A style pack still owns component visuals, so a theme changes tokens rather
+than layout. Every corner radius follows \code{--radius}, including the toast
+surface and the badge, which Tailwind would otherwise fix at a literal size.
 
 \code{style = "base"} drops the visual style entirely, leaving tokens and component
 structure. That is a starting point for writing a style pack, not a way to

@@ -54,4 +54,15 @@ bc_item(
   ),
   href = "#"
 )
+
+bc_item_group(
+  bc_item(
+    htmltools::tags$section(htmltools::tags$h3("Playground")),
+    role = "listitem"
+  ),
+  bc_item(
+    htmltools::tags$section(htmltools::tags$h3("Models")),
+    role = "listitem"
+  )
+)
 }

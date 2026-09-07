@@ -8,7 +8,20 @@
 # and running `just vendor`.
 bc_version <- "1.0.2"
 
-# The style packs, as named on the installation page. `vega` is the default.
+#' The style packs
+#'
+#' The style packs Basecoat ships, as named on its installation page. All of
+#' them are bundled with this package.
+#'
+#' @format A character vector of `r length(bc_styles)` names.
+#' @details
+#' `bc_deps(style = )` also takes `"base"`, which is not a pack but the
+#' styleless layer underneath them.
+#' @export
+#' @examples
+#' bc_styles
+#'
+#' lapply(bc_styles, function(style) bc_deps(style, js = FALSE))
 bc_styles <- c(
   "vega",
   "nova",
@@ -73,9 +86,9 @@ bc_scripts <- c(
 #' `theme` is the whole of custom theming, and it is returned after the
 #' stylesheet rather than beside it so its token values win.
 #'
-#' A style pack settles a few visuals without reading your tokens. `--radius-lg`
-#' and its siblings follow `--radius`, but `--radius-2xl` and `--radius-4xl` are
-#' fixed, and `.badge` uses the latter. Restate those in your theme to reach them.
+#' A style pack still owns component visuals, so a theme changes tokens rather
+#' than layout. Every corner radius follows `--radius`, including the toast
+#' surface and the badge, which Tailwind would otherwise fix at a literal size.
 #'
 #' `style = "base"` drops the visual style entirely, leaving tokens and component
 #' structure. That is a starting point for writing a style pack, not a way to
@@ -170,6 +183,24 @@ bc_deps <- function(
 #' and is not needed, since the bundled stylesheet already maps those tokens.
 #'
 #' The dependency is named after the file, so two different files both load.
+#'
+#' @section Themes from tweakcn:
+#' A tweakcn export works unedited. Its `:root` and `.dark` blocks are the whole
+#' of the theme, and they are plain CSS, so a browser reads them and their
+#' unlayered declarations beat the style pack's.
+#'
+#' The rest of the file is Tailwind build syntax that a browser ignores:
+#' `@import "tailwindcss"`, `@custom-variant`, `@theme inline` and any
+#' `@layer base` block of `@apply` rules. Nothing is lost by that. The bundled
+#' stylesheet already maps `--color-primary` to `--primary` and its siblings, and
+#' already paints the page background, so the `@theme inline` and `@layer base`
+#' blocks would only restate what is there. Deleting them, and the `@import`
+#' line that resolves to nothing, saves the browser a failed request.
+#'
+#' Two things do need doing by hand. A theme that names a web font, such as
+#' `--font-sans: DM Sans`, has to load it, since the file only names it. And
+#' `letter-spacing` from `--tracking-normal` is applied by an `@apply` rule, so
+#' restate it as `body { letter-spacing: var(--tracking-normal) }` to keep it.
 #' @export
 #' @examples
 #' css <- tempfile(fileext = ".css")
@@ -203,18 +234,22 @@ bc_theme <- function(path) {
 # Which script files answer a `js` argument. The runtime has to come first when
 # individual components are asked for, and is already inside the all-in-one.
 bc_script_files <- function(js, call = caller_env()) {
-  if (isTRUE(js)) {
-    return("all.min.js")
-  }
-
   if (isFALSE(js)) {
     return(character())
   }
 
+  if (isTRUE(js)) {
+    return(c("all.min.js", bc_own_scripts))
+  }
+
   js <- arg_match(js, bc_scripts, multiple = TRUE, error_call = call)
 
-  c("basecoat.min.js", paste0(js, ".min.js"))
+  c("basecoat.min.js", paste0(js, ".min.js"), bc_own_scripts)
 }
+
+# This package's own, from `srcjs/`, and always last: they correct vendored
+# behaviour by listening after it rather than by forking it.
+bc_own_scripts <- "nested-popover.js"
 
 #' Re-initialise Basecoat after a swap
 #'

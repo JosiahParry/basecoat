@@ -97,4 +97,20 @@ bc_dropdown_menu(
   bc_dropdown_separator(),
   bc_dropdown_item("Log out")
 )
+
+bc_dropdown_menu(
+  bc_dropdown_group(
+    "Panels",
+    bc_dropdown_checkbox("Status bar", checked = TRUE),
+    bc_dropdown_checkbox("Activity bar"),
+    bc_dropdown_checkbox("Terminal", disabled = TRUE)
+  ),
+  bc_dropdown_separator(),
+  bc_dropdown_group(
+    "Position",
+    bc_dropdown_radio("Top", checked = TRUE),
+    bc_dropdown_radio("Bottom")
+  ),
+  trigger_label = "View"
+)
 }

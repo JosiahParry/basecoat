@@ -24,6 +24,11 @@
 #'   category = "success",
 #'   cancel = list(label = "Dismiss")
 #' )
+#'
+#' bc_toaster(
+#'   bc_toast("Upload failed", category = "error"),
+#'   align = "start"
+#' )
 bc_toast <- function(title,
                      ...,
                      description = NULL,

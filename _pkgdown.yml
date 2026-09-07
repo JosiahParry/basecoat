@@ -6,8 +6,10 @@ reference:
   desc: The stylesheet and scripts a page needs.
   contents:
   - bc_deps
+  - bc_styles
   - bc_theme
   - bc_init
+  - print.bc_tag
 - title: Layout
   desc: Regions that hold other components.
   contents:

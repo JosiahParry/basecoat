@@ -20,7 +20,7 @@ bc_badge_variants <- c(
 #' @return A `<span>` tag.
 #' @export
 #' @examples
-#' bc_badge("kill")
+#' bc_badge("stable")
 #'
 #' bc_badge("wipe", variant = "destructive")
 bc_badge <- function(..., variant = "default") {

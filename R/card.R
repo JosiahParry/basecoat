@@ -21,12 +21,12 @@
 #' @examples
 #' bc_card(
 #'   bc_card_header(
-#'     htmltools::h2("Gurtogg Bloodboil"),
-#'     htmltools::p("25 players, 4:12"),
-#'     bc_card_action("kill")
+#'     htmltools::h2("Production deploy"),
+#'     htmltools::p("v1.4.2, 3m 12s"),
+#'     bc_card_action(bc_badge("passed"))
 #'   ),
-#'   bc_card_body(htmltools::p("Nobody died.")),
-#'   bc_card_footer(htmltools::p("Audited just now."))
+#'   bc_card_body(htmltools::p("All 128 checks green.")),
+#'   bc_card_footer(htmltools::p("Deployed just now."))
 #' )
 bc_card <- function(...) {
   bc_tag(div(class = "card", ...))

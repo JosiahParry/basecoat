@@ -8,6 +8,7 @@ bc_popover(
   ...,
   id = NULL,
   trigger_label = "Open popover",
+  trigger = NULL,
   side = "bottom",
   align = "center",
   class = NULL
@@ -18,7 +19,10 @@ bc_popover(
 
 \item{id}{String. The ID for the popover wrapper.}
 
-\item{trigger_label}{String. The trigger button's label.}
+\item{trigger_label}{String or tag. The trigger button's label.}
+
+\item{trigger}{A tag. A whole trigger, usually a \code{\link[=bc_button]{bc_button()}}, in place of
+the default outline button. The wiring attributes are added to it.}
 
 \item{side}{String. Placement of the popover. One of \code{top}, \code{right},
 \code{bottom}, \code{left}, \code{inline-start} or \code{inline-end}.}
@@ -26,7 +30,7 @@ bc_popover(
 \item{align}{String. Alignment of the popover on its side. One of \code{start},
 \code{center} or \code{end}.}
 
-\item{class}{String. Extra classes for the popover content, on top of the
+\item{class}{Vector of class names for the popover content, replacing the
 default \code{w-72}.}
 }
 \value{

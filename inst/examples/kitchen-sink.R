@@ -2,12 +2,24 @@
 # open an index. Each page attaches its own `bc_deps()` dependency, so this also
 # proves the style argument reaches the `<head>`.
 #
-#   source("dev/kitchen-sink.R")          # all eight packs, one page each
-#   kitchen_sink("vega", theme = "~/theme.css")   # a pack under your own tokens
-#   kitchen_sink("base")                  # tokens and structure, no visual style
-#   kitchen_sink("rhea")                  # just one, opened directly
+#   source(system.file("examples", "kitchen-sink.R", package = "basecoat"))
+#
+# Sourcing the file draws all eight packs and opens an index. Call it again for
+# one pack, or for a pack under your own tokens:
+#
+#   kitchen_sink("rhea")
+#   kitchen_sink("base")
+#   kitchen_sink("vega", theme = "~/theme.css")
+#
+# tweakcn-theme.css sits beside this file, an unedited tweakcn export kept here
+# so the claim that one works unedited stays honest:
+#
+#   kitchen_sink(
+#     "vega",
+#     theme = system.file("examples", "tweakcn-theme.css", package = "basecoat")
+#   )
 
-devtools::load_all()
+library(basecoat)
 library(htmltools)
 
 # One labelled row of examples. Layout is inline style, not Tailwind, so the
@@ -294,12 +306,12 @@ demo_sections <- function() {
       "Card",
       bc_card(
         bc_card_header(
-          h2("Gurtogg Bloodboil"),
-          p("25 players, 4:12"),
-          bc_card_action(bc_badge("kill", variant = "secondary"))
+          h2("Production deploy"),
+          p("v1.4.2, 3m 12s"),
+          bc_card_action(bc_badge("passed", variant = "secondary"))
         ),
-        bc_card_body(p("Nobody died.")),
-        bc_card_footer(p("Audited just now."))
+        bc_card_body(p("All 128 checks green.")),
+        bc_card_footer(p("Deployed just now."))
       )
     ),
     demo_group(
@@ -707,7 +719,7 @@ write_page <- function(page, file, background = "var(--background)") {
 }
 
 kitchen_sink <- function(styles = bc_styles, theme = NULL) {
-  styles <- rlang::arg_match(styles, bc_style_choices, multiple = TRUE)
+  styles <- rlang::arg_match(styles, c("base", bc_styles), multiple = TRUE)
 
   dir <- tempfile("basecoat-kitchen-")
   dir.create(dir)

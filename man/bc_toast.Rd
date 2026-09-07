@@ -92,6 +92,11 @@ bc_toast(
   category = "success",
   cancel = list(label = "Dismiss")
 )
+
+bc_toaster(
+  bc_toast("Upload failed", category = "error"),
+  align = "start"
+)
 bc_toast_trigger(
   "Toast from backend (with HTMX)",
   get = "/fragments/toast/success"

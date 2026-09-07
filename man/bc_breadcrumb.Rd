@@ -42,4 +42,12 @@ bc_breadcrumb(
   bc_breadcrumb_item("Components", href = "#"),
   bc_breadcrumb_item("Breadcrumb", current = TRUE)
 )
+
+bc_breadcrumb(
+  bc_breadcrumb_item("Docs", href = "#"),
+  bc_breadcrumb_item("Theming", current = TRUE),
+  separator = "dot"
+)
+
+bc_breadcrumb_separator("dot")
 }
