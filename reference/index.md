@@ -1,0 +1,173 @@
+# Package index
+
+## Serving Basecoat
+
+The stylesheet and scripts a page needs.
+
+- [`bc_deps()`](https://josiahparry.github.io/basecoat/reference/bc_deps.md)
+  : Basecoat assets
+- [`bc_styles`](https://josiahparry.github.io/basecoat/reference/bc_styles.md)
+  : The style packs
+- [`bc_theme()`](https://josiahparry.github.io/basecoat/reference/bc_theme.md)
+  : A custom theme stylesheet
+- [`bc_init()`](https://josiahparry.github.io/basecoat/reference/bc_init.md)
+  : Re-initialise Basecoat after a swap
+- [`print(`*`<bc_tag>`*`)`](https://josiahparry.github.io/basecoat/reference/print.bc_tag.md)
+  : Render a component at the console
+
+## Layout
+
+Regions that hold other components.
+
+- [`bc_card()`](https://josiahparry.github.io/basecoat/reference/bc_card.md)
+  [`bc_card_header()`](https://josiahparry.github.io/basecoat/reference/bc_card.md)
+  [`bc_card_body()`](https://josiahparry.github.io/basecoat/reference/bc_card.md)
+  [`bc_card_footer()`](https://josiahparry.github.io/basecoat/reference/bc_card.md)
+  [`bc_card_action()`](https://josiahparry.github.io/basecoat/reference/bc_card.md)
+  : Card
+- [`bc_sidebar()`](https://josiahparry.github.io/basecoat/reference/bc_sidebar.md)
+  [`bc_sidebar_group()`](https://josiahparry.github.io/basecoat/reference/bc_sidebar.md)
+  [`bc_sidebar_item()`](https://josiahparry.github.io/basecoat/reference/bc_sidebar.md)
+  [`bc_sidebar_submenu()`](https://josiahparry.github.io/basecoat/reference/bc_sidebar.md)
+  [`bc_sidebar_separator()`](https://josiahparry.github.io/basecoat/reference/bc_sidebar.md)
+  : Sidebar
+- [`bc_scroll_area()`](https://josiahparry.github.io/basecoat/reference/bc_scroll_area.md)
+  : Scroll Area
+- [`bc_item()`](https://josiahparry.github.io/basecoat/reference/bc_item.md)
+  [`bc_item_group()`](https://josiahparry.github.io/basecoat/reference/bc_item.md)
+  : Item
+- [`bc_empty()`](https://josiahparry.github.io/basecoat/reference/bc_empty.md)
+  : Empty
+
+## Actions
+
+Controls that do something when clicked.
+
+- [`bc_button()`](https://josiahparry.github.io/basecoat/reference/bc_button.md)
+  : Button
+- [`bc_button_group()`](https://josiahparry.github.io/basecoat/reference/bc_button_group.md)
+  [`bc_button_group_separator()`](https://josiahparry.github.io/basecoat/reference/bc_button_group.md)
+  : Button Group
+- [`bc_dropdown_menu()`](https://josiahparry.github.io/basecoat/reference/bc_dropdown_menu.md)
+  [`bc_dropdown_item()`](https://josiahparry.github.io/basecoat/reference/bc_dropdown_menu.md)
+  [`bc_dropdown_group()`](https://josiahparry.github.io/basecoat/reference/bc_dropdown_menu.md)
+  [`bc_dropdown_separator()`](https://josiahparry.github.io/basecoat/reference/bc_dropdown_menu.md)
+  [`bc_dropdown_checkbox()`](https://josiahparry.github.io/basecoat/reference/bc_dropdown_menu.md)
+  [`bc_dropdown_radio()`](https://josiahparry.github.io/basecoat/reference/bc_dropdown_menu.md)
+  : Dropdown Menu
+- [`bc_command()`](https://josiahparry.github.io/basecoat/reference/bc_command.md)
+  [`bc_command_item()`](https://josiahparry.github.io/basecoat/reference/bc_command.md)
+  [`bc_command_group()`](https://josiahparry.github.io/basecoat/reference/bc_command.md)
+  [`bc_command_separator()`](https://josiahparry.github.io/basecoat/reference/bc_command.md)
+  : Command
+- [`bc_pagination()`](https://josiahparry.github.io/basecoat/reference/bc_pagination.md)
+  [`bc_pagination_item()`](https://josiahparry.github.io/basecoat/reference/bc_pagination.md)
+  [`bc_pagination_ellipsis()`](https://josiahparry.github.io/basecoat/reference/bc_pagination.md)
+  [`bc_pagination_previous()`](https://josiahparry.github.io/basecoat/reference/bc_pagination.md)
+  [`bc_pagination_next()`](https://josiahparry.github.io/basecoat/reference/bc_pagination.md)
+  : Pagination
+- [`bc_theme_switcher()`](https://josiahparry.github.io/basecoat/reference/bc_theme_switcher.md)
+  : Theme Switcher
+
+## Inputs
+
+Form controls and the field wrappers around them.
+
+- [`bc_field()`](https://josiahparry.github.io/basecoat/reference/bc_field.md)
+  [`bc_fieldset()`](https://josiahparry.github.io/basecoat/reference/bc_field.md)
+  [`bc_field_group()`](https://josiahparry.github.io/basecoat/reference/bc_field.md)
+  [`bc_field_separator()`](https://josiahparry.github.io/basecoat/reference/bc_field.md)
+  : Field
+- [`bc_label()`](https://josiahparry.github.io/basecoat/reference/bc_label.md)
+  : Label
+- [`bc_input()`](https://josiahparry.github.io/basecoat/reference/bc_input.md)
+  : Input
+- [`bc_input_group()`](https://josiahparry.github.io/basecoat/reference/bc_input_group.md)
+  [`bc_input_group_addon()`](https://josiahparry.github.io/basecoat/reference/bc_input_group.md)
+  : Input Group
+- [`bc_textarea()`](https://josiahparry.github.io/basecoat/reference/bc_textarea.md)
+  : Textarea
+- [`bc_checkbox()`](https://josiahparry.github.io/basecoat/reference/bc_checkbox.md)
+  : Checkbox
+- [`bc_radio()`](https://josiahparry.github.io/basecoat/reference/bc_radio.md)
+  : Radio Input
+- [`bc_radio_group()`](https://josiahparry.github.io/basecoat/reference/bc_radio_group.md)
+  : Radio Group
+- [`bc_switch()`](https://josiahparry.github.io/basecoat/reference/bc_switch.md)
+  : Switch
+- [`bc_slider()`](https://josiahparry.github.io/basecoat/reference/bc_slider.md)
+  : Slider
+- [`bc_select()`](https://josiahparry.github.io/basecoat/reference/bc_select.md)
+  : Select
+- [`bc_select_option()`](https://josiahparry.github.io/basecoat/reference/bc_select_option.md)
+  : Select Option
+- [`bc_native_select()`](https://josiahparry.github.io/basecoat/reference/bc_native_select.md)
+  [`bc_native_select_option()`](https://josiahparry.github.io/basecoat/reference/bc_native_select.md)
+  [`bc_native_select_group()`](https://josiahparry.github.io/basecoat/reference/bc_native_select.md)
+  : Native Select
+- [`bc_combobox()`](https://josiahparry.github.io/basecoat/reference/bc_combobox.md)
+  : Combobox
+- [`bc_combobox_option()`](https://josiahparry.github.io/basecoat/reference/bc_combobox_option.md)
+  : Combobox option
+- [`bc_combobox_group()`](https://josiahparry.github.io/basecoat/reference/bc_combobox_group.md)
+  : Combobox group
+- [`bc_combobox_separator()`](https://josiahparry.github.io/basecoat/reference/bc_combobox_separator.md)
+  : Combobox separator
+
+## Navigation
+
+Moving between views.
+
+- [`bc_tabs()`](https://josiahparry.github.io/basecoat/reference/bc_tabs.md)
+  : Tabs
+- [`bc_tab()`](https://josiahparry.github.io/basecoat/reference/bc_tab.md)
+  : Tab Panel
+- [`bc_breadcrumb()`](https://josiahparry.github.io/basecoat/reference/bc_breadcrumb.md)
+  [`bc_breadcrumb_item()`](https://josiahparry.github.io/basecoat/reference/bc_breadcrumb.md)
+  [`bc_breadcrumb_separator()`](https://josiahparry.github.io/basecoat/reference/bc_breadcrumb.md)
+  : Breadcrumb
+
+## Overlays
+
+Content layered over the page.
+
+- [`bc_dialog()`](https://josiahparry.github.io/basecoat/reference/bc_dialog.md)
+  : Dialog
+- [`bc_dialog_trigger()`](https://josiahparry.github.io/basecoat/reference/bc_dialog_trigger.md)
+  : Dialog Trigger Button
+- [`bc_alert_dialog()`](https://josiahparry.github.io/basecoat/reference/bc_alert_dialog.md)
+  : Alert Dialog
+- [`bc_drawer()`](https://josiahparry.github.io/basecoat/reference/bc_drawer.md)
+  : Drawer
+- [`bc_popover()`](https://josiahparry.github.io/basecoat/reference/bc_popover.md)
+  : Popover
+- [`bc_tooltip()`](https://josiahparry.github.io/basecoat/reference/bc_tooltip.md)
+  : Tooltip
+- [`bc_toast()`](https://josiahparry.github.io/basecoat/reference/bc_toast.md)
+  [`bc_toaster()`](https://josiahparry.github.io/basecoat/reference/bc_toast.md)
+  [`bc_toast_trigger()`](https://josiahparry.github.io/basecoat/reference/bc_toast.md)
+  : Toast
+
+## Display
+
+Components that show state rather than collect it.
+
+- [`bc_alert()`](https://josiahparry.github.io/basecoat/reference/bc_alert.md)
+  : Alert
+- [`bc_avatar()`](https://josiahparry.github.io/basecoat/reference/bc_avatar.md)
+  [`bc_avatar_group()`](https://josiahparry.github.io/basecoat/reference/bc_avatar.md)
+  [`bc_avatar_badge()`](https://josiahparry.github.io/basecoat/reference/bc_avatar.md)
+  : Avatar
+- [`bc_badge()`](https://josiahparry.github.io/basecoat/reference/bc_badge.md)
+  : Badge
+- [`bc_kbd()`](https://josiahparry.github.io/basecoat/reference/bc_kbd.md)
+  : Keyboard Key
+- [`bc_progress()`](https://josiahparry.github.io/basecoat/reference/bc_progress.md)
+  : Progress
+- [`bc_skeleton()`](https://josiahparry.github.io/basecoat/reference/bc_skeleton.md)
+  : Skeleton
+- [`bc_spinner()`](https://josiahparry.github.io/basecoat/reference/bc_spinner.md)
+  : Spinner
+- [`bc_accordion()`](https://josiahparry.github.io/basecoat/reference/bc_accordion.md)
+  [`bc_accordion_item()`](https://josiahparry.github.io/basecoat/reference/bc_accordion.md)
+  : Accordion
