@@ -54,6 +54,10 @@
   component functions write. Basecoat's published CSS carries only the utilities
   its own source uses, so from those files a pagination row does not lay out and
   a spinner does not turn.
+* Printing a component at the console renders it, with the stylesheet and
+  scripts attached. The dependency is added at print time, so a page built from
+  many components still carries one copy and still honours the style its
+  `bc_deps()` call asked for.
 * `bc_deps(theme = )` loads a CSS file of your own after the style pack, for
   overriding Basecoat's tokens with a shadcn/ui theme. `bc_theme()` builds that
   dependency on its own.

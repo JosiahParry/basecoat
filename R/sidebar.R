@@ -65,7 +65,7 @@ bc_sidebar <- function(id = NULL,
   check_bool(initial_mobile_open, allow_null = TRUE)
   check_string(breakpoint, allow_null = TRUE, allow_empty = FALSE)
 
-  tags$aside(
+  bc_tag(tags$aside(
     id = id,
     class = "sidebar",
     `data-side` = side,
@@ -78,7 +78,7 @@ bc_sidebar <- function(id = NULL,
       tags$section(class = "scrollbar-sm", ...),
       if (!is.null(footer)) tags$footer(footer)
     )
-  )
+  ))
 }
 
 #' @rdname bc_sidebar
@@ -102,12 +102,12 @@ bc_sidebar_group <- function(title, ..., id = NULL) {
     id <- bc_sidebar_id("sidebar-group")
   }
 
-  div(
+  bc_tag(div(
     role = "group",
     `aria-labelledby` = id,
     tags$h3(id = id, title),
     tags$ul(lapply(list(...), tags$li))
-  )
+  ))
 }
 
 #' @rdname bc_sidebar
@@ -152,7 +152,7 @@ bc_sidebar_item <- function(label,
 
   item_tag <- if (!is.null(href)) tags$a else tags$button
 
-  item_tag(
+  bc_tag(item_tag(
     href = href,
     type = if (is.null(href)) "button",
     `data-variant` = if (variant != "default") variant,
@@ -165,7 +165,7 @@ bc_sidebar_item <- function(label,
     ...,
     icon,
     tags$span(label)
-  )
+  ))
 }
 
 #' @rdname bc_sidebar
@@ -196,7 +196,7 @@ bc_sidebar_submenu <- function(label,
   }
   content_id <- paste0(id, "-content")
 
-  tags$details(
+  bc_tag(tags$details(
     id = id,
     tags$summary(
       `aria-controls` = content_id,
@@ -208,11 +208,11 @@ bc_sidebar_submenu <- function(label,
       tags$span(label)
     ),
     tags$ul(id = content_id, lapply(list(...), tags$li))
-  )
+  ))
 }
 
 #' @rdname bc_sidebar
 #' @export
 bc_sidebar_separator <- function() {
-  tags$hr(role = "separator")
+  bc_tag(tags$hr(role = "separator"))
 }

@@ -50,13 +50,13 @@ bc_input_group <- function(...,
   check_string(aria_label, allow_null = TRUE, allow_empty = FALSE)
   check_string(class, allow_null = TRUE, allow_empty = TRUE)
 
-  div(
+  bc_tag(div(
     class = paste(c("input-group", class), collapse = " "),
     `data-orientation` = if (orientation != "default") orientation,
     role = if (!is.null(aria_label)) "group",
     `aria-label` = aria_label,
     ...
-  )
+  ))
 }
 
 #' @rdname bc_input_group
@@ -65,9 +65,9 @@ bc_input_group_addon <- function(..., align = "start", aria_hidden = FALSE) {
   align <- arg_match(align, bc_input_group_aligns)
   check_bool(aria_hidden)
 
-  span(
+  bc_tag(span(
     `data-align` = align,
     `aria-hidden` = if (aria_hidden) "true",
     ...
-  )
+  ))
 }

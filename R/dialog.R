@@ -91,7 +91,7 @@ bc_dialog <- function(id,
     dialog <- htmltools::tagAppendAttributes(dialog, `open` = NA)
   }
 
-  dialog
+  bc_tag(dialog)
 }
 
 #' Dialog Trigger Button
@@ -107,9 +107,9 @@ bc_dialog <- function(id,
 bc_dialog_trigger <- function(dialog_id, ...) {
   check_string(dialog_id, allow_empty = FALSE)
   
-  tags$button(
+  bc_tag(tags$button(
     type = "button",
     onclick = paste0("document.getElementById('", dialog_id, "').showModal()"),
     ...
-  )
+  ))
 }

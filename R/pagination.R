@@ -22,7 +22,7 @@
 bc_pagination <- function(..., label = "pagination") {
   check_string(label, allow_empty = FALSE)
 
-  tags$nav(
+  bc_tag(tags$nav(
     role = "navigation",
     `aria-label` = label,
     class = "mx-auto flex w-full justify-center",
@@ -30,7 +30,7 @@ bc_pagination <- function(..., label = "pagination") {
       class = "flex flex-row items-center gap-1",
       ...
     )
-  )
+  ))
 }
 
 #' @rdname bc_pagination
@@ -44,7 +44,7 @@ bc_pagination_item <- function(item, href = "#", current = FALSE, ...) {
   check_string(href, allow_empty = FALSE)
   check_bool(current)
 
-  tags$li(
+  bc_tag(tags$li(
     a(
       href = href,
       class = "btn",
@@ -53,18 +53,18 @@ bc_pagination_item <- function(item, href = "#", current = FALSE, ...) {
       item,
       ...
     )
-  )
+  ))
 }
 
 #' @rdname bc_pagination
 #' @export
 bc_pagination_ellipsis <- function() {
-  tags$li(
+  bc_tag(tags$li(
     div(
       class = "size-9 flex items-center justify-center",
       HTML(pagination_lucide("ellipsis"))
     )
-  )
+  ))
 }
 
 #' @rdname bc_pagination
@@ -73,7 +73,7 @@ bc_pagination_previous <- function(label = "Previous", href = "#") {
   check_string(label, allow_empty = FALSE)
   check_string(href, allow_empty = FALSE)
 
-  tags$li(
+  bc_tag(tags$li(
     a(
       href = href,
       class = "btn",
@@ -81,7 +81,7 @@ bc_pagination_previous <- function(label = "Previous", href = "#") {
       HTML(pagination_lucide("chevron-left")),
       span(label)
     )
-  )
+  ))
 }
 
 #' @rdname bc_pagination
@@ -90,7 +90,7 @@ bc_pagination_next <- function(label = "Next", href = "#") {
   check_string(label, allow_empty = FALSE)
   check_string(href, allow_empty = FALSE)
 
-  tags$li(
+  bc_tag(tags$li(
     a(
       href = href,
       class = "btn",
@@ -98,7 +98,7 @@ bc_pagination_next <- function(label = "Next", href = "#") {
       span(label),
       HTML(pagination_lucide("chevron-right"))
     )
-  )
+  ))
 }
 
 pagination_lucide <- function(icon) {

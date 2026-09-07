@@ -11,3 +11,6 @@
 ^bun\.lock$
 ^justfile$
 ^srcss$
+^\.github$
+^docs$
+^pkgdown$

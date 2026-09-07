@@ -19,10 +19,10 @@ bc_tooltip <- function(..., text, side = "top", align = "center") {
   side <- arg_match(side, c("top", "bottom", "left", "right", "inline-start", "inline-end"))
   align <- arg_match(align, c("start", "center", "end"))
 
-  tags$span(
+  bc_tag(tags$span(
     `data-tooltip` = text,
     `data-side` = side,
     `data-align` = align,
     ...
-  )
+  ))
 }

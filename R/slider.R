@@ -58,7 +58,7 @@ bc_slider <- function(min,
   )
 
   if (is.null(label) && is.null(description)) {
-    return(input)
+    return(bc_tag(input))
   }
 
   label_tag <- if (!is.null(label)) tags$label(class = "label", `for` = id, label)

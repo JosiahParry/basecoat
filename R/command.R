@@ -80,10 +80,10 @@ bc_command <- function(...,
   )
 
   if (!dialog) {
-    return(command)
+    return(bc_tag(command))
   }
 
-  tagList(
+  bc_tag(tagList(
     tags$button(
       type = "button",
       class = "btn",
@@ -98,7 +98,7 @@ bc_command <- function(...,
       onclick = "if (event.target === this) this.close()",
       command
     )
-  )
+  ))
 }
 
 #' @rdname bc_command
@@ -136,7 +136,7 @@ bc_command_item <- function(label,
 
   item_tag <- if (!is.null(href)) tags$a else tags$div
 
-  item_tag(
+  bc_tag(item_tag(
     role = "menuitem",
     href = href,
     `data-filter` = if (is.null(filter)) label else filter,
@@ -154,7 +154,7 @@ bc_command_item <- function(label,
       span(label)
     },
     if (!is.null(shortcut)) span(`data-shortcut` = NA, shortcut)
-  )
+  ))
 }
 
 #' @rdname bc_command
@@ -164,18 +164,18 @@ bc_command_group <- function(title, ...) {
   check_string(title, allow_empty = FALSE)
   heading_id <- paste0("command-label-", paste0(sample(1:9, 8, replace = TRUE), collapse = ""))
 
-  div(
+  bc_tag(div(
     role = "group",
     `aria-labelledby` = heading_id,
     span(role = "heading", id = heading_id, title),
     command_items(list(...))
-  )
+  ))
 }
 
 #' @rdname bc_command
 #' @export
 bc_command_separator <- function() {
-  tags$hr(role = "separator")
+  bc_tag(tags$hr(role = "separator"))
 }
 
 command_items <- function(items) {

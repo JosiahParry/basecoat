@@ -30,12 +30,12 @@ bc_accordion <- function(...,
     id <- paste0("accordion-", paste0(sample(1:9, 8, replace = TRUE), collapse = ""))
   }
 
-  tags$section(
+  bc_tag(tags$section(
     id = id,
     class = paste0("accordion", if (!is.null(class)) paste0(" ", class)),
     `data-multiple` = if (multiple) NA,
     accordion_items(list(...))
-  )
+  ))
 }
 
 #' @rdname bc_accordion
@@ -49,13 +49,13 @@ bc_accordion_item <- function(title, ..., open = FALSE, disabled = FALSE, id = N
   check_bool(disabled)
   check_string(id, allow_null = TRUE, allow_empty = FALSE)
 
-  tags$details(
+  bc_tag(tags$details(
     id = id,
     open = if (open) NA,
     `aria-disabled` = if (disabled) "true",
     tags$summary(title, accordion_lucide()),
     tags$section(...)
-  )
+  ))
 }
 
 accordion_items <- function(items) {

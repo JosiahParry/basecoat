@@ -20,5 +20,5 @@
 #'
 #' bc_skeleton(class = "size-10 shrink-0 rounded-full")
 bc_skeleton <- function(...) {
-  div(class = "skeleton", ...)
+  bc_tag(div(class = "skeleton", ...))
 }

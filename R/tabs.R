@@ -85,12 +85,12 @@ bc_tabs <- function(..., variant = "default", orientation = "horizontal", id = N
   )
   
   # Create the main tabs container
-  div(
+  bc_tag(div(
     class = "tabs w-full",
     id = id,
     nav,
     panels
-  )
+  ))
 }
 
 #' Tab Panel

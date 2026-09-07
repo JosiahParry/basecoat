@@ -26,9 +26,9 @@ bc_badge_variants <- c(
 bc_badge <- function(..., variant = "default") {
   variant <- arg_match(variant, bc_badge_variants)
 
-  span(
+  bc_tag(span(
     class = "badge",
     `data-variant` = if (variant != "default") variant,
     ...
-  )
+  ))
 }

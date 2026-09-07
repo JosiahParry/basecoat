@@ -51,11 +51,11 @@ bc_button <- function(..., variant = "primary", size = "default", type = "button
   size <- arg_match(size, bc_button_sizes)
   check_string(type, allow_empty = FALSE)
 
-  tags$button(
+  bc_tag(tags$button(
     type = type,
     class = "btn",
     `data-variant` = if (variant != "primary") variant,
     `data-size` = if (size != "default") size,
     ...
-  )
+  ))
 }

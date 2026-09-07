@@ -29,9 +29,9 @@
 bc_alert <- function(..., variant = "default") {
   variant <- arg_match(variant, c("default", "destructive"))
 
-  div(
+  bc_tag(div(
     class = "alert",
     `data-variant` = if (variant != "default") "destructive",
     ...
-  )
+  ))
 }

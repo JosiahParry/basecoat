@@ -15,5 +15,8 @@ Imports:
     cli,
     htmltools (>= 0.5.4),
     rlang (>= 1.1.0)
-URL: https://basecoatui.com
+URL: https://basecoatui.com, https://josiahparry.github.io/basecoat/
 Config/roxygen2/version: 8.1.0.9000
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

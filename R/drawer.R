@@ -71,10 +71,10 @@ bc_drawer <- function(...,
   )
 
   if (is.null(trigger)) {
-    return(dialog)
+    return(bc_tag(dialog))
   }
 
-  tagList(
+  bc_tag(tagList(
     tags$button(
       type = "button",
       class = "btn",
@@ -83,5 +83,5 @@ bc_drawer <- function(...,
       trigger
     ),
     dialog
-  )
+  ))
 }

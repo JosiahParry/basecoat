@@ -18,5 +18,5 @@
 #'   htmltools::tags$input(type = "checkbox", class = "input")
 #' )
 bc_label <- function(...) {
-  tags$label(class = "label", ...)
+  bc_tag(tags$label(class = "label", ...))
 }

@@ -55,7 +55,7 @@ bc_theme_switcher <- function(...) {
     span(class = "block dark:hidden", HTML(bc_theme_switcher_icons$moon))
   )
 
-  htmltools::attachDependencies(button, bc_theme_switcher_shim())
+  bc_tag(htmltools::attachDependencies(button, bc_theme_switcher_shim()))
 }
 
 # The utilities and initial-mode script behind the button, as a dependency so
@@ -64,9 +64,10 @@ bc_theme_switcher_shim <- function() {
   htmltools::htmlDependency(
     name = "basecoat-theme-switcher",
     version = bc_version,
-    src = c(
-      href = paste0("https://cdn.jsdelivr.net/npm/basecoat-css@", bc_version, "/dist")
-    ),
+    src = c(file = "basecoat"),
+    package = "basecoat",
+    # Nothing but the head is served, so no file is copied out of the package.
+    all_files = FALSE,
     head = HTML(c(
       "<style>",
       ".size-8 { width: 2rem; height: 2rem; }",

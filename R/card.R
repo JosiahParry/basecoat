@@ -29,29 +29,29 @@
 #'   bc_card_footer(htmltools::p("Audited just now."))
 #' )
 bc_card <- function(...) {
-  div(class = "card", ...)
+  bc_tag(div(class = "card", ...))
 }
 
 #' @rdname bc_card
 #' @export
 bc_card_header <- function(...) {
-  tags$header(...)
+  bc_tag(tags$header(...))
 }
 
 #' @rdname bc_card
 #' @export
 bc_card_body <- function(...) {
-  tags$section(...)
+  bc_tag(tags$section(...))
 }
 
 #' @rdname bc_card
 #' @export
 bc_card_footer <- function(...) {
-  tags$footer(...)
+  bc_tag(tags$footer(...))
 }
 
 #' @rdname bc_card
 #' @export
 bc_card_action <- function(...) {
-  div(class = "card-action", ...)
+  bc_tag(div(class = "card-action", ...))
 }

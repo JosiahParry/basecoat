@@ -39,17 +39,17 @@ bc_button_group <- function(...,
   check_string(aria_label, allow_null = TRUE, allow_empty = FALSE)
   check_string(class, allow_null = TRUE, allow_empty = TRUE)
 
-  div(
+  bc_tag(div(
     role = "group",
     class = paste(c("button-group", class), collapse = " "),
     `aria-label` = aria_label,
     `data-orientation` = if (orientation != "default") orientation,
     ...
-  )
+  ))
 }
 
 #' @rdname bc_button_group
 #' @export
 bc_button_group_separator <- function() {
-  tags$hr(role = "separator")
+  bc_tag(tags$hr(role = "separator"))
 }

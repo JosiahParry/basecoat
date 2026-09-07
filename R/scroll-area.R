@@ -25,12 +25,12 @@ bc_scroll_area <- function(...,
   overflow <- arg_match(overflow, c("auto", "x", "y"))
   check_string(class, allow_null = TRUE, allow_empty = TRUE)
 
-  div(
+  bc_tag(div(
     class = paste(c(
       if (size == "sm") "scrollbar-sm" else "scrollbar",
       if (overflow == "auto") "overflow-auto" else paste0("overflow-", overflow),
       class
     ), collapse = " "),
     ...
-  )
+  ))
 }

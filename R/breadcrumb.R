@@ -33,11 +33,11 @@ bc_breadcrumb <- function(..., label = "Breadcrumb", separator = "chevron-right"
     )
   }
 
-  tags$nav(
+  bc_tag(tags$nav(
     class = "breadcrumb",
     `aria-label` = label,
     tags$ol(items)
-  )
+  ))
 }
 
 #' @rdname bc_breadcrumb
@@ -52,10 +52,10 @@ bc_breadcrumb_item <- function(item, href = NULL, current = FALSE) {
   check_bool(current)
 
   if (current) {
-    return(tags$li(span(`aria-current` = "page", item)))
+    return(bc_tag(tags$li(span(`aria-current` = "page", item))))
   }
 
-  tags$li(a(href = href, item))
+  bc_tag(tags$li(a(href = href, item)))
 }
 
 #' @rdname bc_breadcrumb
@@ -64,10 +64,10 @@ bc_breadcrumb_item <- function(item, href = NULL, current = FALSE) {
 bc_breadcrumb_separator <- function(icon = "chevron-right") {
   icon <- arg_match(icon, c("chevron-right", "dot"))
 
-  tags$li(
+  bc_tag(tags$li(
     `aria-hidden` = "true",
     HTML(breadcrumb_lucide(icon))
-  )
+  ))
 }
 
 breadcrumb_lucide <- function(icon) {

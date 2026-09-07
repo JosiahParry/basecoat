@@ -76,7 +76,7 @@ bc_dropdown_menu <- function(...,
     trigger_label
   )
 
-  div(class = "dropdown-menu", id = id, trigger, popover)
+  bc_tag(div(class = "dropdown-menu", id = id, trigger, popover))
 }
 
 #' @rdname bc_dropdown_menu
@@ -98,7 +98,7 @@ bc_dropdown_item <- function(label,
     variant <- arg_match(variant, c("destructive"))
   }
 
-  div(
+  bc_tag(div(
     role = "menuitem",
     `aria-disabled` = if (disabled) "true",
     `data-variant` = variant,
@@ -106,7 +106,7 @@ bc_dropdown_item <- function(label,
     icon,
     if (is.null(shortcut)) label else span(label),
     if (!is.null(shortcut)) tags$kbd(shortcut)
-  )
+  ))
 }
 
 #' @rdname bc_dropdown_menu
@@ -118,7 +118,7 @@ bc_dropdown_group <- function(title = NULL,
                               ...,
                               heading_id = NULL) {
   if (is.null(title)) {
-    return(div(role = "group", dropdown_items(list(...))))
+    return(bc_tag(div(role = "group", dropdown_items(list(...)))))
   }
 
   check_string(title, allow_empty = FALSE)
@@ -127,18 +127,18 @@ bc_dropdown_group <- function(title = NULL,
     heading_id <- paste0("dropdown-label-", paste0(sample(1:9, 8, replace = TRUE), collapse = ""))
   }
 
-  div(
+  bc_tag(div(
     role = "group",
     `aria-labelledby` = heading_id,
     div(role = "heading", id = heading_id, title),
     dropdown_items(list(...))
-  )
+  ))
 }
 
 #' @rdname bc_dropdown_menu
 #' @export
 bc_dropdown_separator <- function() {
-  tags$hr(role = "separator")
+  bc_tag(tags$hr(role = "separator"))
 }
 
 #' @rdname bc_dropdown_menu
@@ -153,7 +153,7 @@ bc_dropdown_checkbox <- function(label,
   check_bool(checked)
   check_bool(disabled)
 
-  div(
+  bc_tag(div(
     role = "menuitemcheckbox",
     `aria-checked` = tolower(checked),
     `aria-disabled` = if (disabled) "true",
@@ -161,7 +161,7 @@ bc_dropdown_checkbox <- function(label,
     span(`data-indicator` = NA, dropdown_lucide("check")),
     if (!is.null(icon)) icon,
     if (is.null(icon)) label else span(label)
-  )
+  ))
 }
 
 #' @rdname bc_dropdown_menu
@@ -175,7 +175,7 @@ bc_dropdown_radio <- function(label,
   check_bool(checked)
   check_bool(disabled)
 
-  div(
+  bc_tag(div(
     role = "menuitemradio",
     `aria-checked` = tolower(checked),
     `aria-disabled` = if (disabled) "true",
@@ -183,7 +183,7 @@ bc_dropdown_radio <- function(label,
     span(`data-indicator` = NA, dropdown_lucide("check")),
     if (!is.null(icon)) icon,
     if (is.null(icon)) label else span(label)
-  )
+  ))
 }
 
 dropdown_items <- function(items) {

@@ -20,7 +20,7 @@ bc_spinner <- function(label = "Loading", size = NULL, ...) {
   check_string(label, allow_empty = FALSE)
   check_string(size, allow_null = TRUE, allow_empty = FALSE)
 
-  tags$svg(
+  bc_tag(tags$svg(
     `aria-label` = label,
     role = "status",
     class = paste0(
@@ -38,5 +38,5 @@ bc_spinner <- function(label = "Loading", size = NULL, ...) {
     `stroke-linejoin` = "round",
     tags$path(d = "M21 12a9 9 0 1 1-6.219-8.56"),
     ...
-  )
+  ))
 }

@@ -76,7 +76,7 @@ bc_combobox <- function(id,
     if (length(selected)) selected[[1]] else ""
   }
 
-  div(
+  bc_tag(div(
     class = c("combobox", class),
     id = id,
     tags$input(
@@ -112,7 +112,7 @@ bc_combobox <- function(id,
       )
     ),
     tags$input(type = "hidden", name = name, value = hidden_value)
-  )
+  ))
 }
 
 #' Combobox option
@@ -151,13 +151,13 @@ bc_combobox_option <- function(value, ..., label = NULL, filter = NULL) {
   } else {
     label
   }
-  div(
+  bc_tag(div(
     role = "option",
     `data-value` = value,
     `data-label` = label,
     `data-filter` = filter,
     content
-  )
+  ))
 }
 
 #' Combobox group
@@ -177,12 +177,12 @@ bc_combobox_option <- function(value, ..., label = NULL, filter = NULL) {
 bc_combobox_group <- function(title, ...) {
   check_string(title, allow_empty = FALSE)
   heading_id <- paste0("combobox-group-", paste0(sample(1:9, 8, replace = TRUE), collapse = ""))
-  div(
+  bc_tag(div(
     role = "group",
     `aria-labelledby` = heading_id,
     div(role = "heading", id = heading_id, title),
     ...
-  )
+  ))
 }
 
 #' Combobox separator
@@ -194,7 +194,7 @@ bc_combobox_group <- function(title, ...) {
 #' @examples
 #' bc_combobox_separator()
 bc_combobox_separator <- function() {
-  tags$hr(role = "separator")
+  bc_tag(tags$hr(role = "separator"))
 }
 
 combobox_items <- function(args) {

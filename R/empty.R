@@ -45,5 +45,5 @@ bc_empty <- function(title = NULL,
 
   footer <- if (!is.null(actions)) tags$footer(actions)
 
-  tags$section(class = "empty", ..., header, footer)
+  bc_tag(tags$section(class = "empty", ..., header, footer))
 }

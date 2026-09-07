@@ -30,7 +30,7 @@ bc_radio_group <- function(..., name, label = name, disabled = FALSE, invalid = 
   check_bool(disabled)
   check_bool(invalid)
 
-  div(
+  bc_tag(div(
     role = "radiogroup",
     `aria-label` = label,
     `data-slot` = "radio-group",
@@ -38,7 +38,7 @@ bc_radio_group <- function(..., name, label = name, disabled = FALSE, invalid = 
     `data-disabled` = if (disabled) NA,
     `data-invalid` = if (invalid) NA,
     lapply(list(...), radio_group_set_name, name = name)
-  )
+  ))
 }
 
 radio_group_set_name <- function(tag, name) {

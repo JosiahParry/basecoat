@@ -20,5 +20,5 @@
 #' bc_kbd("⏎", `data-icon` = "inline-end")
 bc_kbd <- function(label, ...) {
   check_string(label, allow_empty = FALSE)
-  tags$kbd(class = "kbd", ..., label)
+  bc_tag(tags$kbd(class = "kbd", ..., label))
 }

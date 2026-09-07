@@ -79,7 +79,7 @@ bc_input <- function(...,
   )
 
   if (is.null(label)) {
-    return(input)
+    return(bc_tag(input))
   }
 
   bc_field(

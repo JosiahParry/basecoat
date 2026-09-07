@@ -34,14 +34,14 @@ bc_avatar <- function(...,
   check_string(alt, allow_null = TRUE)
   check_string(fallback, allow_null = TRUE, allow_empty = FALSE)
 
-  span(
+  bc_tag(span(
     class = "avatar",
     `data-size` = if (size != "default") size,
     ...,
     if (!is.null(src)) tags$img(src = src, alt = alt),
     if (!is.null(fallback)) span(fallback),
     badge
-  )
+  ))
 }
 
 #' @rdname bc_avatar
@@ -55,11 +55,11 @@ bc_avatar <- function(...,
 #'   count = "+3"
 #' )
 bc_avatar_group <- function(..., count = NULL) {
-  div(
+  bc_tag(div(
     class = "avatar-group",
     ...,
     if (!is.null(count)) span(`data-count` = NA, count)
-  )
+  ))
 }
 
 #' @rdname bc_avatar
@@ -71,5 +71,5 @@ bc_avatar_group <- function(..., count = NULL) {
 #'   badge = bc_avatar_badge(class = "bg-green-600")
 #' )
 bc_avatar_badge <- function(...) {
-  span(class = "avatar-badge", ...)
+  bc_tag(span(class = "avatar-badge", ...))
 }

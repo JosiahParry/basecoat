@@ -37,7 +37,7 @@ bc_progress <- function(value, min = 0, max = 100, label = NULL, ...) {
     )
   }
 
-  div(
+  bc_tag(div(
     class = "progress",
     role = "progressbar",
     `aria-label` = label,
@@ -46,7 +46,7 @@ bc_progress <- function(value, min = 0, max = 100, label = NULL, ...) {
     `aria-valuemax` = max,
     ...,
     span(style = paste0("width: ", bc_share(value, min, max), "%"))
-  )
+  ))
 }
 
 # Where `value` sits in its range, as a percentage. Two decimals is finer than

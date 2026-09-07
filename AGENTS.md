@@ -24,6 +24,17 @@ listed by `@source` in `srcss/*.css`**. Add a class to a component, then run
 To move to a new `basecoat-css` release: bump the version in `package.json`, bump
 `bc_version` in `R/deps.R`, run `just vendor`, then re-document.
 
+## Components return `bc_tag()`
+
+Every component function wraps its returned tag in `bc_tag()`, which adds the
+class that `print.bc_tag()` dispatches on so printing one at the console renders
+it. A function that returns another component, such as `bc_checkbox()` returning
+`bc_field()`, is already wrapped and needs nothing. `bc_tab()` and
+`bc_select_option()` return plain lists rather than tags, so they stay unwrapped.
+
+The dependency is attached when printing, never inside the tag, so composing
+components never accumulates copies of it.
+
 ## Coding Standards
 
 - Never use `do.call()`

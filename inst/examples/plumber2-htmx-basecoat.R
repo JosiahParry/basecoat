@@ -1,6 +1,6 @@
 # A plumber2 API that demonstrates Basecoat components with htmxr.
 #
-# This example shows how to use Basecoat UI components within an HTMXR 
+# This example shows how to use Basecoat UI components within an HTMXR
 # application, including forms, cards, and interactive elements.
 #
 # Run from package root with:
@@ -11,8 +11,8 @@
 #
 # Then open http://localhost:8080 to see the Basecoat HTMX application.
 
-library(basecoat)
 library(htmxr)
+library(basecoat)
 
 #* @get /
 #* @serializer htmx
@@ -35,7 +35,7 @@ function() {
         style = "color:var(--muted-foreground);margin:0;text-align:center;",
         "This page demonstrates Basecoat UI components integrated with HTMXR for interactive web applications."
       ),
-      
+
       # Example of a card component
       bc_card(
         bc_card_header(h2("Interactive Card")),
@@ -47,7 +47,7 @@ function() {
           bc_button("Action Button", variant = "outline")
         )
       ),
-      
+
       # Example of a form with basecoat styling
       bc_form(
         bc_field(
@@ -56,11 +56,15 @@ function() {
         ),
         bc_field(
           tags$label(`for` = "user-email", "Email"),
-          bc_input(id = "user-email", type = "email", placeholder = "Enter your email")
+          bc_input(
+            id = "user-email",
+            type = "email",
+            placeholder = "Enter your email"
+          )
         ),
         bc_button("Submit Form", type = "submit", variant = "default")
       ),
-      
+
       # Example of a table with basecoat styling
       bc_table(
         bc_table_header(
@@ -83,16 +87,16 @@ function() {
           )
         )
       ),
-      
+
       # Example of a toast trigger
       bc_toast_trigger(
         "Show Success Toast",
         get = "/fragments/toast/success"
       ),
-      
+
       # Example of a modal trigger
       bc_button("Open Modal", id = "open-modal-btn", variant = "outline"),
-      
+
       # The toaster for displaying toasts
       bc_toaster()
     )
@@ -116,7 +120,7 @@ function(req) {
   # Process form submission
   name <- req$post$`user-name`
   email <- req$post$`user-email`
-  
+
   if (is.null(name) || is.null(email)) {
     bc_toast(
       "Error",
@@ -127,7 +131,7 @@ function(req) {
   } else {
     # Simulate processing
     Sys.sleep(0.5)
-    
+
     bc_toast(
       "Success",
       description = paste("Form submitted for", name),
@@ -148,7 +152,11 @@ function() {
       tags$p("It can contain any content including forms and buttons.")
     ),
     bc_modal_footer(
-      bc_button("Close", variant = "outline", onclick = "document.getElementById('modal').close()")
+      bc_button(
+        "Close",
+        variant = "outline",
+        onclick = "document.getElementById('modal').close()"
+      )
     )
   )
 }

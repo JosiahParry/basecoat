@@ -58,5 +58,5 @@ bc_popover <- function(...,
     ...
   )
 
-  div(class = "popover", id = id, trigger, popover)
+  bc_tag(div(class = "popover", id = id, trigger, popover))
 }

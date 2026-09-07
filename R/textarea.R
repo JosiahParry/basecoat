@@ -74,7 +74,7 @@ bc_textarea <- function(...,
   )
 
   if (is.null(label)) {
-    return(textarea)
+    return(bc_tag(textarea))
   }
 
   bc_field(

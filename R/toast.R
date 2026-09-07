@@ -48,7 +48,7 @@ bc_toast <- function(title,
     )
   }
 
-  div(
+  bc_tag(div(
     class = "toast",
     role = "status",
     `aria-atomic` = "true",
@@ -65,7 +65,7 @@ bc_toast <- function(title,
       ),
       footer
     )
-  )
+  ))
 }
 
 #' @rdname bc_toast
@@ -81,12 +81,12 @@ bc_toaster <- function(..., id = "toaster", align = "end") {
   align <- arg_match(align, c("start", "center", "end"))
   check_string(id, allow_empty = FALSE)
 
-  div(
+  bc_tag(div(
     id = id,
     class = "toaster",
     `data-align` = align,
     ...
-  )
+  ))
 }
 
 #' @rdname bc_toast
@@ -120,7 +120,7 @@ bc_toast_trigger <- function(label,
   variant <- arg_match(variant, bc_button_variants)
   size <- arg_match(size, bc_button_sizes)
 
-  tags$button(
+  bc_tag(tags$button(
     type = "button",
     class = "btn",
     `data-variant` = if (variant != "primary") variant,
@@ -132,7 +132,7 @@ bc_toast_trigger <- function(label,
     `hx-swap` = "beforeend",
     label,
     ...
-  )
+  ))
 }
 
 toast_action <- function(action) {

@@ -97,7 +97,7 @@ bc_native_select <- function(...,
   )
 
   if (is.null(label)) {
-    return(select)
+    return(bc_tag(select))
   }
 
   bc_field(
@@ -114,12 +114,12 @@ bc_native_select <- function(...,
 #' @export
 bc_native_select_option <- function(value, ..., label = NULL) {
   check_string(value, allow_empty = TRUE)
-  tags$option(value = value, ..., label)
+  bc_tag(tags$option(value = value, ..., label))
 }
 
 #' @rdname bc_native_select
 #' @export
 bc_native_select_group <- function(label, ...) {
   check_string(label, allow_empty = FALSE)
-  tags$optgroup(label = label, ...)
+  bc_tag(tags$optgroup(label = label, ...))
 }

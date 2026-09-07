@@ -53,14 +53,14 @@ bc_item <- function(...,
 
   tag <- if (is.null(href)) tags$article else tags$a
 
-  tag(
+  bc_tag(tag(
     href = href,
     role = role,
     class = "item",
     `data-variant` = if (variant != "default") variant,
     `data-size` = if (size != "default") size,
     ...
-  )
+  ))
 }
 
 #' @rdname bc_item
@@ -69,9 +69,9 @@ bc_item <- function(...,
 bc_item_group <- function(..., class = NULL) {
   check_string(class, allow_null = TRUE, allow_empty = TRUE)
 
-  div(
+  bc_tag(div(
     class = paste(c("item-group", class), collapse = " "),
     role = "list",
     ...
-  )
+  ))
 }

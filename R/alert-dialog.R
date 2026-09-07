@@ -92,10 +92,10 @@ bc_alert_dialog <- function(...,
   )
 
   if (is.null(trigger)) {
-    return(dialog)
+    return(bc_tag(dialog))
   }
 
-  tagList(
+  bc_tag(tagList(
     tags$button(
       type = "button",
       class = "btn",
@@ -104,7 +104,7 @@ bc_alert_dialog <- function(...,
       trigger
     ),
     dialog
-  )
+  ))
 }
 
 alert_dialog_action <- function(x, variant, call = caller_env()) {

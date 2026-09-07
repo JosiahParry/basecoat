@@ -122,18 +122,18 @@ bc_select <- function(...,
   )
   
   # Create the main select container
-  div(
+  bc_tag(div(
     class = "select",
     id = id,
     `data-placeholder` = placeholder,
     `data-disabled` = if (disabled) NA,
     `data-invalid` = if (invalid) NA,
     `data-multiple` = if (multiple) NA,
-    
+
     trigger_button,
     popover,
     hidden_input
-  )
+  ))
 }
 
 #' Select Option

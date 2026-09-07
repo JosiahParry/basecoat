@@ -41,14 +41,14 @@ bc_field <- function(...,
   check_bool(disabled)
   check_bool(invalid)
 
-  div(
+  bc_tag(div(
     role = "group",
     class = "field",
     `data-orientation` = if (orientation != "default") orientation,
     `data-disabled` = if (disabled) NA,
     `data-invalid` = if (invalid) NA,
     ...
-  )
+  ))
 }
 
 #' @rdname bc_field
@@ -66,12 +66,12 @@ bc_field <- function(...,
 #'   )
 #' )
 bc_fieldset <- function(..., legend = NULL, description = NULL) {
-  tags$fieldset(
+  bc_tag(tags$fieldset(
     class = "fieldset",
     if (!is.null(legend)) tags$legend(legend),
     if (!is.null(description)) tags$p(description),
     ...
-  )
+  ))
 }
 
 #' @rdname bc_field
@@ -91,18 +91,18 @@ bc_fieldset <- function(..., legend = NULL, description = NULL) {
 #'   )
 #' )
 bc_field_group <- function(...) {
-  div(
+  bc_tag(div(
     role = "group",
     class = "fieldset",
     ...
-  )
+  ))
 }
 
 #' @rdname bc_field
 #' @export
 bc_field_separator <- function() {
-  div(
+  bc_tag(div(
     class = "field-separator",
     tags$hr(role = "separator")
-  )
+  ))
 }
