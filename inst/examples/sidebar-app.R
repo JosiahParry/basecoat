@@ -254,4 +254,4 @@ sidebar_app <- function(
   invisible(file)
 }
 
-sidebar_app()
+sidebar_app(theme = )

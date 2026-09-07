@@ -11,10 +11,6 @@
   --radius-4xl: calc(var(--radius) * 3.2);
 }
 
-/* Upstream draws a table for a handful of rows, and its row height is what
-   stops a long one being readable in a screen. `sm` keeps the inline padding
-   and takes the vertical back, the same `data-size` the button and the card
-   already answer to. */
 /* A popover is capped at 18rem and scrolls, which is right for a menu and
    wrong for one holding another popover: the nested list is positioned inside
    it, so the cap cuts it off and the scroll takes the heading with it. */
@@ -25,6 +21,10 @@
   }
 }
 
+/* Upstream draws a table for a handful of rows, and its row height is what
+   stops a long one being readable in a screen. `sm` keeps the inline padding
+   and takes the vertical back, the same `data-size` the button and the card
+   already answer to. */
 @layer components {
   .table[data-size="sm"] th {
     height: auto;
