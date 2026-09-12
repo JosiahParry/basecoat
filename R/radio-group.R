@@ -6,6 +6,8 @@
 #' @param name String. The `name` attribute applied to every radio in the
 #'   group, overriding any per-input name.
 #' @param label String. Accessible label for the group, defaulting to `name`.
+#' @param id String. The group `id`, defaulting to `name`. Used by
+#'   [bc_shiny_deps()] to read and update the checked value as `input$id`.
 #' @param disabled Bool. Whether to mark the entire group as disabled.
 #' @param invalid Bool. Whether to show the invalid state for the group.
 #' @return A tag with role="radiogroup".
@@ -24,13 +26,15 @@
 #'   bc_radio("yearly", "Yearly"),
 #'   bc_radio("lifetime", "Lifetime")
 #' )
-bc_radio_group <- function(..., name, label = name, disabled = FALSE, invalid = FALSE) {
+bc_radio_group <- function(..., name, label = name, id = name, disabled = FALSE, invalid = FALSE) {
   check_string(name, allow_empty = FALSE)
   check_string(label, allow_empty = FALSE)
+  check_string(id, allow_empty = FALSE)
   check_bool(disabled)
   check_bool(invalid)
 
   bc_tag(div(
+    id = id,
     role = "radiogroup",
     `aria-label` = label,
     `data-slot` = "radio-group",
@@ -93,6 +97,7 @@ bc_radio <- function(id,
     type = "radio",
     id = id,
     name = name,
+    value = id,
     class = "input",
     checked = if (checked) NA,
     disabled = if (disabled) NA,

@@ -71,17 +71,20 @@ bc_drawer <- function(...,
   )
 
   if (is.null(trigger)) {
-    return(bc_tag(dialog))
+    return(bc_tag(htmltools::attachDependencies(dialog, bc_script_dep("drawer"))))
   }
 
-  bc_tag(tagList(
-    tags$button(
-      type = "button",
-      class = "btn",
-      `data-variant` = "outline",
-      onclick = paste0("document.getElementById('", id, "').showModal()"),
-      trigger
+  bc_tag(htmltools::attachDependencies(
+    tagList(
+      tags$button(
+        type = "button",
+        class = "btn",
+        `data-variant` = "outline",
+        onclick = paste0("document.getElementById('", id, "').showModal()"),
+        trigger
+      ),
+      dialog
     ),
-    dialog
+    bc_script_dep("drawer")
   ))
 }

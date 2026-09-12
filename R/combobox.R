@@ -76,7 +76,7 @@ bc_combobox <- function(id,
     if (length(selected)) selected[[1]] else ""
   }
 
-  bc_tag(div(
+  bc_tag(htmltools::attachDependencies(div(
     class = c("combobox", class),
     id = id,
     `data-auto-highlight` = if (auto_highlight) "true",
@@ -113,7 +113,7 @@ bc_combobox <- function(id,
       )
     ),
     tags$input(type = "hidden", name = name, value = hidden_value)
-  ))
+  ), bc_script_dep("combobox", popover = TRUE)))
 }
 
 #' Combobox option

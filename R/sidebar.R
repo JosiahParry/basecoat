@@ -31,8 +31,6 @@ bc_sidebar_id <- function(prefix) {
 #'   becomes the mobile overlay, such as `"48rem"`.
 #' @return An `<aside>` tag.
 #' @details
-#' Sidebar needs its script, so load it through [bc_deps()] with `js = "sidebar"`.
-#'
 #' The desktop margin of the sibling `<main>` is Basecoat's own styling; the
 #' toggle button that opens and closes the sidebar is a page control.
 #' @export
@@ -70,19 +68,22 @@ bc_sidebar <- function(id = NULL,
   check_bool(initial_mobile_open, allow_null = TRUE)
   check_string(breakpoint, allow_null = TRUE, allow_empty = FALSE)
 
-  bc_tag(tags$aside(
-    id = id,
-    class = "sidebar",
-    `data-side` = side,
-    `data-initial-open` = if (!is.null(initial_open)) tolower(initial_open),
-    `data-initial-mobile-open` = if (!is.null(initial_mobile_open)) tolower(initial_mobile_open),
-    `data-breakpoint` = breakpoint,
-    tags$nav(
-      `aria-label` = aria_label,
-      if (!is.null(header)) tags$header(header),
-      tags$section(class = "scrollbar-sm", ...),
-      if (!is.null(footer)) tags$footer(footer)
-    )
+  bc_tag(htmltools::attachDependencies(
+    tags$aside(
+      id = id,
+      class = "sidebar",
+      `data-side` = side,
+      `data-initial-open` = if (!is.null(initial_open)) tolower(initial_open),
+      `data-initial-mobile-open` = if (!is.null(initial_mobile_open)) tolower(initial_mobile_open),
+      `data-breakpoint` = breakpoint,
+      tags$nav(
+        `aria-label` = aria_label,
+        if (!is.null(header)) tags$header(header),
+        tags$section(class = "scrollbar-sm", ...),
+        if (!is.null(footer)) tags$footer(footer)
+      )
+    ),
+    bc_script_dep("sidebar")
   ))
 }
 

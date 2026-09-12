@@ -10,11 +10,8 @@
 # plumber2::api("inst/examples/plumber2-htmx-toast.R") |>
 #   htmxr::hx_serve_assets() |>
 #   plumber2::api_run()
-#
-# Then open http://localhost:8080 and click "Toast from backend (with HTMX)".
-
-library(basecoat)
 library(htmxr)
+library(basecoat)
 
 #* @get /
 #* @serializer htmx

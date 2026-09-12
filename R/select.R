@@ -96,7 +96,7 @@ bc_select <- function(...,
     ))
   )
 
-  bc_tag(div(
+  bc_tag(htmltools::attachDependencies(div(
     class = "select",
     id = id,
     `data-placeholder` = placeholder,
@@ -123,7 +123,7 @@ bc_select <- function(...,
       name = name,
       value = select_value(chosen, multiple)
     )
-  ))
+  ), bc_script_dep("select", popover = TRUE)))
 }
 
 # A string, a `bc_select_option()`, a tag that already is an option, or a list

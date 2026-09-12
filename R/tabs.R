@@ -93,11 +93,14 @@ bc_tabs <- function(..., variant = "default", orientation = "horizontal", id = N
   )
   
   # Create the main tabs container
-  bc_tag(div(
-    class = "tabs w-full",
-    id = id,
-    nav,
-    panels
+  bc_tag(htmltools::attachDependencies(
+    div(
+      class = "tabs w-full",
+      id = id,
+      nav,
+      panels
+    ),
+    bc_script_dep("tabs")
   ))
 }
 

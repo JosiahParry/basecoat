@@ -30,11 +30,14 @@ bc_accordion <- function(...,
     id <- paste0("accordion-", paste0(sample(1:9, 8, replace = TRUE), collapse = ""))
   }
 
-  bc_tag(tags$section(
-    id = id,
-    class = paste0("accordion", if (!is.null(class)) paste0(" ", class)),
-    `data-multiple` = if (multiple) NA,
-    accordion_items(list(...))
+  bc_tag(htmltools::attachDependencies(
+    tags$section(
+      id = id,
+      class = paste0("accordion", if (!is.null(class)) paste0(" ", class)),
+      `data-multiple` = if (multiple) NA,
+      accordion_items(list(...))
+    ),
+    bc_script_dep("accordion")
   ))
 }
 

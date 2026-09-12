@@ -6,7 +6,7 @@
 \usage{
 bc_deps(
   style = NULL,
-  js = TRUE,
+  js = FALSE,
   theme = NULL,
   source = c("local", "cdn"),
   version = bc_version
@@ -16,8 +16,10 @@ bc_deps(
 \item{style}{String or \code{NULL}. A style pack, one of vega, nova, maia, lyra, mira, luma, sera, rhea,
 or \code{"base"} for tokens and structure with no visual style at all.}
 
-\item{js}{\code{TRUE} for every component's script, \code{FALSE} for none, or a
-character vector of component names to load beside the runtime.}
+\item{js}{\code{FALSE} by default, since a component function attaches its own
+script the moment it appears in the page. \code{TRUE} for every script, or a
+character vector of component names to load beside the runtime, for
+markup written by hand rather than with one of this package's functions.}
 
 \item{theme}{String or \code{NULL}. Path to a CSS file of your own, loaded after
 the style pack so its tokens win. See \code{\link[=bc_theme]{bc_theme()}}.}
@@ -41,6 +43,12 @@ by default, or from jsDelivr.
 Attach it with \code{\link[htmltools:attachDependencies]{htmltools::attachDependencies()}}, or return it in a
 \code{\link[htmltools:tagList]{htmltools::tagList()}} beside your markup. Call it once per page: a second
 call with another style is de-duplicated by name and only one wins.
+
+Every component function that needs a script, such as \code{\link[=bc_select]{bc_select()}} or
+\code{\link[=bc_sidebar]{bc_sidebar()}}, attaches its own alongside the shared runtime when it is
+called, so \code{bc_deps()} only has to carry the stylesheet. \code{js} stays around
+for markup copied from Basecoat's docs and written by hand, which carries no
+such dependency.
 
 \code{theme} is the whole of custom theming, and it is returned after the
 stylesheet rather than beside it so its token values win.

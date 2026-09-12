@@ -44,17 +44,20 @@ bc_slider <- function(min,
 
   described_by <- if (!is.null(description)) paste0(id, "-description")
 
-  input <- tags$input(
-    type = "range",
-    class = "input w-full",
-    min = min,
-    max = max,
-    value = value,
-    id = id,
-    disabled = if (disabled) NA,
-    `aria-describedby` = described_by,
-    oninput = oninput,
-    ...
+  input <- htmltools::attachDependencies(
+    tags$input(
+      type = "range",
+      class = "input w-full",
+      min = min,
+      max = max,
+      value = value,
+      id = id,
+      disabled = if (disabled) NA,
+      `aria-describedby` = described_by,
+      oninput = oninput,
+      ...
+    ),
+    bc_script_dep("range")
   )
 
   if (is.null(label) && is.null(description)) {

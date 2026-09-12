@@ -61,7 +61,10 @@ bc_popover <- function(...,
     ...
   )
 
-  bc_tag(div(class = "popover", id = id, trigger, popover))
+  bc_tag(htmltools::attachDependencies(
+    div(class = "popover", id = id, trigger, popover),
+    bc_script_dep("popover", popover = TRUE)
+  ))
 }
 
 # The script finds the trigger as `:scope > button`, so a caller's own is used

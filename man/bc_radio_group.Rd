@@ -4,7 +4,14 @@
 \alias{bc_radio_group}
 \title{Radio Group}
 \usage{
-bc_radio_group(..., name, label = name, disabled = FALSE, invalid = FALSE)
+bc_radio_group(
+  ...,
+  name,
+  label = name,
+  id = name,
+  disabled = FALSE,
+  invalid = FALSE
+)
 }
 \arguments{
 \item{...}{Radio tags from \code{\link[=bc_radio]{bc_radio()}}.}
@@ -13,6 +20,9 @@ bc_radio_group(..., name, label = name, disabled = FALSE, invalid = FALSE)
 group, overriding any per-input name.}
 
 \item{label}{String. Accessible label for the group, defaulting to \code{name}.}
+
+\item{id}{String. The group \code{id}, defaulting to \code{name}. Used by
+\code{\link[=bc_shiny_deps]{bc_shiny_deps()}} to read and update the checked value as \code{input$id}.}
 
 \item{disabled}{Bool. Whether to mark the entire group as disabled.}
 

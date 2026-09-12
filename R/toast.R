@@ -86,11 +86,14 @@ bc_toaster <- function(..., id = "toaster", align = "end") {
   align <- arg_match(align, c("start", "center", "end"))
   check_string(id, allow_empty = FALSE)
 
-  bc_tag(div(
-    id = id,
-    class = "toaster",
-    `data-align` = align,
-    ...
+  bc_tag(htmltools::attachDependencies(
+    div(
+      id = id,
+      class = "toaster",
+      `data-align` = align,
+      ...
+    ),
+    bc_script_dep("toast")
   ))
 }
 

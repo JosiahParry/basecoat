@@ -80,24 +80,27 @@ bc_command <- function(...,
   )
 
   if (!dialog) {
-    return(bc_tag(command))
+    return(bc_tag(htmltools::attachDependencies(command, bc_script_dep("command"))))
   }
 
-  bc_tag(tagList(
-    tags$button(
-      type = "button",
-      class = "btn",
-      `data-variant` = "outline",
-      onclick = paste0("document.getElementById('", id, "').showModal()"),
-      trigger
+  bc_tag(htmltools::attachDependencies(
+    tagList(
+      tags$button(
+        type = "button",
+        class = "btn",
+        `data-variant` = "outline",
+        onclick = paste0("document.getElementById('", id, "').showModal()"),
+        trigger
+      ),
+      tags$dialog(
+        id = id,
+        class = "command-dialog",
+        `aria-label` = label,
+        onclick = "if (event.target === this) this.close()",
+        command
+      )
     ),
-    tags$dialog(
-      id = id,
-      class = "command-dialog",
-      `aria-label` = label,
-      onclick = "if (event.target === this) this.close()",
-      command
-    )
+    bc_script_dep("command")
   ))
 }
 

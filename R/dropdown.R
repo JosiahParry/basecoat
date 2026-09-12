@@ -98,7 +98,10 @@ bc_dropdown_menu <- function(...,
     `aria-expanded` = "false"
   )
 
-  bc_tag(div(class = "dropdown-menu", id = id, trigger, popover))
+  bc_tag(htmltools::attachDependencies(
+    div(class = "dropdown-menu", id = id, trigger, popover),
+    bc_script_dep("dropdown-menu", popover = TRUE)
+  ))
 }
 
 #' @rdname bc_dropdown_menu

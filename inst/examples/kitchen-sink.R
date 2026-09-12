@@ -21,6 +21,7 @@
 
 library(basecoat)
 library(htmltools)
+library(phosphoricons)
 
 # One labelled row of examples. Layout is inline style, not Tailwind, so the
 # only stylesheet in play is the Basecoat bundle under test.
@@ -257,13 +258,7 @@ demo_sections <- function() {
         tags$span(
           `data-align` = "start",
           `aria-hidden` = "true",
-          HTML(
-            '<svg class="lucide lucide-search" xmlns="http://www.w3.org/2000/svg" ',
-            'width="24" height="24" viewBox="0 0 24 24" fill="none" ',
-            'stroke="currentColor" stroke-width="2" stroke-linecap="round" ',
-            'stroke-linejoin="round"><path d="m21 21-4.34-4.34" />',
-            '<circle cx="11" cy="11" r="8" /></svg>'
-          )
+          ph("magnifying-glass", title = NULL)
         ),
         tags$span(
           style = "display:inline-flex;align-items:center;gap:.25rem",
@@ -711,7 +706,7 @@ demo_page <- function(style, theme = NULL) {
     demo_sections()
   )
 
-  attachDependencies(body, bc_deps(style = style, js = TRUE, theme = theme))
+  attachDependencies(body, bc_deps(style = style, theme = theme))
 }
 
 write_page <- function(page, file, background = "var(--background)") {

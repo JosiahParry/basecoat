@@ -1,5 +1,34 @@
 # basecoat 0.0.0.9000
 
+* The navigation and decorative icons in `inst/examples/` (`sidebar-app.R`,
+  `shiny-sidebar-app.R`, `kitchen-sink.R`) now come from `{phosphoricons}`'s
+  `ph()` instead of a hand-rolled Lucide SVG helper. The icons baked into
+  component markup itself, such as the chevrons on `bc_accordion()` and
+  `bc_select()` or the check on `bc_dropdown_checkbox()`, are unchanged: they
+  come from Basecoat's own documented HTML structure, not a decorative choice.
+
+* `bc_radio()` writes `value` on its `<input>`. Without it every radio in a
+  group submitted the browser's default value of `"on"`, so a native form and
+  the new Shiny binding both read the same value no matter which option was
+  checked.
+
+* Every component function that needs a script now attaches its own
+  dependency, so calling it is enough: `bc_deps()` no longer has to be told
+  `js = "select"` or `js = "range"` for the pieces used on the page. `js`
+  defaults to `FALSE` and stays only for markup copied from Basecoat's docs
+  and written by hand rather than with these functions. Fixes a slider whose
+  filled track never updated while dragging because `bc_deps(js = )` had been
+  asked for other components but not `"range"`.
+
+* `bc_shiny_deps()` adds Shiny input bindings for `bc_radio_group()`,
+  `bc_slider()`, `bc_select()` and `bc_combobox()`, the basecoat inputs Shiny
+  cannot already read on its own. `bc_checkbox()`, `bc_switch()`, `bc_input()`,
+  `bc_textarea()` and `bc_native_select()` are plain native elements, so Shiny
+  already binds them without help. `bc_radio_group()` gains an `id` argument,
+  defaulting to `name`, for the binding to read `input$id` from.
+  `inst/examples/shiny-app.R` and `inst/examples/shiny-sidebar-app.R`
+  demonstrate both.
+
 * `bc_dropdown_menu(trigger =)` takes a whole trigger tag, an avatar or
   anything else, in place of the default button.
 

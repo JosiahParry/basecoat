@@ -5,8 +5,9 @@
 #
 # Below the breakpoint the sidebar becomes an overlay that closes when a link
 # inside it is clicked. Above it, the toggle in the toolbar collapses the panel
-# and `<main>` reclaims the width. Both are the Sidebar script's doing, so the
-# page asks for it through `bc_deps(js = )`.
+# and `<main>` reclaims the width. Both are the Sidebar script's doing, and
+# `bc_sidebar()` attaches it itself, along with what `bc_dropdown_menu()`
+# needs for the header and footer controls.
 #
 #   sidebar_app()                       # the default pack
 #   sidebar_app("rhea")                 # another pack
@@ -14,71 +15,16 @@
 
 library(basecoat)
 library(htmltools)
+library(phosphoricons)
 
-# Lucide icons, written inline so the page pulls nothing over the network.
-lucide <- function(name, paths) {
-  HTML(paste0(
-    '<svg class="lucide lucide-',
-    name,
-    '" xmlns="http://www.w3.org/2000/svg" ',
-    'width="24" height="24" viewBox="0 0 24 24" fill="none" ',
-    'stroke="currentColor" stroke-width="2" stroke-linecap="round" ',
-    'stroke-linejoin="round">',
-    paths,
-    "</svg>"
-  ))
-}
-
+# `ph()` returns inline SVG, so these still pull nothing over the network.
 icons <- list(
-  panel = lucide(
-    "panel-left",
-    paste0(
-      '<rect width="18" height="18" x="3" y="3" rx="2" />',
-      '<path d="M9 3v18" />'
-    )
-  ),
-  terminal = lucide(
-    "square-terminal",
-    paste0(
-      '<path d="m7 11 2-2-2-2" /><path d="M11 13h4" />',
-      '<rect width="18" height="18" x="3" y="3" rx="2" ry="2" />'
-    )
-  ),
-  bot = lucide(
-    "bot",
-    paste0(
-      '<path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" />',
-      '<path d="M2 14h2" /><path d="M20 14h2" />',
-      '<path d="M15 13v2" /><path d="M9 13v2" />'
-    )
-  ),
-  book = lucide(
-    "book-open",
-    paste0(
-      '<path d="M12 7v14" />',
-      '<path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 ',
-      '4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />'
-    )
-  ),
-  settings = lucide(
-    "settings",
-    paste0(
-      '<path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 ',
-      '1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 ',
-      '1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 ',
-      '2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 ',
-      '0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />',
-      '<circle cx="12" cy="12" r="3" />'
-    )
-  ),
-  life = lucide(
-    "life-buoy",
-    paste0(
-      '<circle cx="12" cy="12" r="10" /><path d="m4.93 4.93 4.24 4.24" />',
-      '<path d="m14.83 9.17 4.24-4.24" /><path d="m14.83 14.83 4.24 4.24" />',
-      '<path d="m9.17 14.83-4.24 4.24" /><circle cx="12" cy="12" r="4" />'
-    )
-  )
+  panel = ph("sidebar-simple", title = NULL),
+  terminal = ph("terminal-window", title = NULL),
+  bot = ph("robot", title = NULL),
+  book = ph("book-open", title = NULL),
+  settings = ph("gear", title = NULL),
+  life = ph("lifebuoy", title = NULL)
 )
 
 # The id the toggle reaches for. The Sidebar script puts `open()`, `close()` and
@@ -233,14 +179,7 @@ sidebar_app <- function(
   )
 
   save_html(
-    attachDependencies(
-      page,
-      bc_deps(
-        style = style,
-        js = c("sidebar", "dropdown-menu", "popover"),
-        theme = theme
-      )
-    ),
+    attachDependencies(page, bc_deps(style = style, theme = theme)),
     file,
     background = "var(--background)"
   )

@@ -68,8 +68,10 @@ bc_scripts <- c(
 #'
 #' @param style String or `NULL`. A style pack, one of `r toString(bc_styles)`,
 #'   or `"base"` for tokens and structure with no visual style at all.
-#' @param js `TRUE` for every component's script, `FALSE` for none, or a
-#'   character vector of component names to load beside the runtime.
+#' @param js `FALSE` by default, since a component function attaches its own
+#'   script the moment it appears in the page. `TRUE` for every script, or a
+#'   character vector of component names to load beside the runtime, for
+#'   markup written by hand rather than with one of this package's functions.
 #' @param theme String or `NULL`. Path to a CSS file of your own, loaded after
 #'   the style pack so its tokens win. See [bc_theme()].
 #' @param source String. `"local"` to serve the bundled files, or `"cdn"` to
@@ -82,6 +84,12 @@ bc_scripts <- c(
 #' Attach it with [htmltools::attachDependencies()], or return it in a
 #' [htmltools::tagList()] beside your markup. Call it once per page: a second
 #' call with another style is de-duplicated by name and only one wins.
+#'
+#' Every component function that needs a script, such as [bc_select()] or
+#' [bc_sidebar()], attaches its own alongside the shared runtime when it is
+#' called, so `bc_deps()` only has to carry the stylesheet. `js` stays around
+#' for markup copied from Basecoat's docs and written by hand, which carries no
+#' such dependency.
 #'
 #' `theme` is the whole of custom theming, and it is returned after the
 #' stylesheet rather than beside it so its token values win.
@@ -111,7 +119,7 @@ bc_scripts <- c(
 #' htmltools::attachDependencies(bc_button("Save"), bc_deps(theme = css))
 bc_deps <- function(
   style = NULL,
-  js = TRUE,
+  js = FALSE,
   theme = NULL,
   source = c("local", "cdn"),
   version = bc_version
@@ -251,6 +259,32 @@ bc_script_files <- function(js, call = caller_env()) {
 # behaviour by listening after it rather than by forking it.
 bc_own_scripts <- "nested-popover.js"
 
+# What a component with a script attaches to its own tag, so calling the R
+# function is what asks for the script rather than a separate `bc_deps(js = )`
+# the caller has to remember. Every dependency is named by what it carries, so
+# htmltools de-duplicates the runtime and the nested-popover fix across
+# however many components on a page need them, no matter which one loads
+# first.
+bc_script_dep <- function(name, popover = FALSE) {
+  script_dep <- function(name, file = paste0(name, ".min.js")) {
+    htmltools::htmlDependency(
+      name = paste0("basecoat-", name),
+      version = bc_version,
+      src = c(file = "basecoat"),
+      package = "basecoat",
+      script = list(src = paste0("js/", file), defer = NA)
+    )
+  }
+
+  deps <- list(script_dep("runtime", "basecoat.min.js"), script_dep(name))
+
+  if (popover) {
+    deps <- c(deps, list(script_dep("nested-popover", "nested-popover.js")))
+  }
+
+  deps
+}
+
 #' Re-initialise Basecoat after a swap
 #'
 #' Basecoat initialises its components on load and when new DOM is inserted, so
@@ -273,4 +307,33 @@ bc_init <- function(force = FALSE) {
     if (force) "{ force: true }",
     ")"
   )))
+}
+
+#' Shiny input bindings
+#'
+#' JavaScript bindings that let a Shiny app read and update the basecoat
+#' inputs Shiny cannot already: [bc_radio_group()], [bc_slider()],
+#' [bc_select()] and [bc_combobox()].
+#'
+#' @return An [htmltools::htmlDependency()].
+#' @details
+#' Every other basecoat input, [bc_checkbox()], [bc_switch()], [bc_input()],
+#' [bc_textarea()] and [bc_native_select()], is a plain native element with an
+#' `id`, so Shiny's own input bindings already read and update it as
+#' `input$id`. Nothing from this package is needed for those.
+#'
+#' Attach this beside [bc_deps()] in a Shiny UI, in addition to it rather than
+#' instead of it. Outside a Shiny app the script it loads does nothing, since
+#' it checks for `Shiny` before registering anything.
+#' @export
+#' @examples
+#' bc_shiny_deps()
+bc_shiny_deps <- function() {
+  htmltools::htmlDependency(
+    name = "basecoat-shiny",
+    version = bc_version,
+    src = c(file = "basecoat"),
+    package = "basecoat",
+    script = list(src = "js/shiny.js", defer = NA)
+  )
 }
